@@ -1,0 +1,2077 @@
+netcdf clm_params_c180301 {
+dimensions:
+	pft = 25 ;
+	string_length = 40 ;
+	allpfts = 1 ;
+	levgrnd = 15 ;
+	soilorder = 16 ;
+variables:
+	double aereoxid ;
+		aereoxid:comment = "Use with the namelist switch use_aereoxid_prog.  If use_aereoxid_prog is equal to false, then read aereoxid from this parameter file.  Set to value between 0 & 1 (inclusive) for sensitivity tests." ;
+		aereoxid:long_name = "Fraction of methane flux entering aerenchyma rhizosphere that will be oxidized rather than emitted" ;
+		aereoxid:units = "unitless" ;
+	double mino2lim ;
+		mino2lim:long_name = "Minimum anaerobic decomposition rate as a fraction of potential aerobic rate" ;
+		mino2lim:units = "unitless" ;
+	double q10ch4base ;
+		q10ch4base:long_name = "Temperature at which the effective f_ch4 actually equals the constant f_ch4" ;
+	double aleaff(pft) ;
+		aleaff:long_name = "Leaf Allocation coefficient parameter used in CNAllocationn" ;
+		aleaff:units = "unitless" ;
+		aleaff:coordinates = "pftname" ;
+	double allconsl(pft) ;
+		allconsl:long_name = "Leaf Allocation coefficient parameter power used in CNAllocation" ;
+		allconsl:units = "unitless" ;
+		allconsl:_FillValue = 0. ;
+		allconsl:coordinates = "pftname" ;
+	double allconss(pft) ;
+		allconss:long_name = "Stem Allocation coefficient parameter power used in CNAllocation" ;
+		allconss:units = "unitless" ;
+		allconss:_FillValue = 0. ;
+		allconss:coordinates = "pftname" ;
+	double arootf(pft) ;
+		arootf:long_name = "Root Allocation coefficient parameter used in CNAllocation" ;
+		arootf:units = "unitless" ;
+		arootf:_FillValue = 0. ;
+		arootf:coordinates = "pftname" ;
+	double arooti(pft) ;
+		arooti:long_name = "Root Allocation coefficient parameter used in CNAllocation" ;
+		arooti:units = "unitless" ;
+		arooti:_FillValue = 0. ;
+		arooti:coordinates = "pftname" ;
+	double astemf(pft) ;
+		astemf:long_name = "Stem Allocation coefficient parameter used in CNAllocation" ;
+		astemf:units = "unitless" ;
+		astemf:_FillValue = 0. ;
+		astemf:coordinates = "pftname" ;
+	double baset(pft) ;
+		baset:long_name = "Base Temperature, parameter used in accFlds" ;
+		baset:units = "C" ;
+		baset:coordinates = "pftname" ;
+	double bfact(pft) ;
+		bfact:long_name = "Exponential factor used in CNAllocation for fraction allocated to leaf" ;
+		bfact:units = "unitless" ;
+		bfact:_FillValue = 0. ;
+		bfact:coordinates = "pftname" ;
+	double c3psn(pft) ;
+		c3psn:long_name = "Photosynthetic pathway" ;
+		c3psn:units = "flag" ;
+		c3psn:coordinates = "pftname" ;
+		c3psn:valid_range = 0., 1. ;
+		c3psn:flag_meanings = "C4 C3" ;
+		c3psn:flag_values = 0., 1. ;
+	double cc_dstem(pft) ;
+		cc_dstem:units = "0 to 1" ;
+		cc_dstem:long_name = "Combustion completeness factor for dead stem" ;
+		cc_dstem:_FillValue = -999.99 ;
+	double cc_leaf(pft) ;
+		cc_leaf:units = "0 to 1" ;
+		cc_leaf:long_name = "Combustion completeness factor for leaf" ;
+		cc_leaf:_FillValue = -999.99 ;
+	double cc_lstem(pft) ;
+		cc_lstem:units = "0 to 1" ;
+		cc_lstem:long_name = "Combustion completeness factor for live stem" ;
+		cc_lstem:_FillValue = -999.99 ;
+	double cc_other(pft) ;
+		cc_other:units = "0 to 1" ;
+		cc_other:long_name = "Combustion completeness factor for other plant" ;
+		cc_other:_FillValue = -999.99 ;
+	double croot_stem(pft) ;
+		croot_stem:long_name = "Allocation parameter: new coarse root C per new stem C" ;
+		croot_stem:units = "gC/gC" ;
+		croot_stem:coordinates = "pftname" ;
+	double crop(pft) ;
+		crop:long_name = "Binary crop PFT flag:" ;
+		crop:units = "logical flag" ;
+		crop:coordinates = "pftname" ;
+		crop:valid_range = 0., 1. ;
+		crop:flag_values = 0., 1. ;
+		crop:flag_meanings = "NOT_crop crop_PFT" ;
+	double deadwdcn(pft) ;
+		deadwdcn:long_name = "Dead wood (xylem and heartwood) C:N" ;
+		deadwdcn:units = "gC/gN" ;
+		deadwdcn:coordinates = "pftname" ;
+	double declfact(pft) ;
+		declfact:long_name = "Decline factor for gddmaturity used in CNAllocation" ;
+		declfact:units = "unitless" ;
+		declfact:_FillValue = 0. ;
+		declfact:coordinates = "pftname" ;
+	double displar(pft) ;
+		displar:long_name = "Ratio of displacement height to canopy top height" ;
+		displar:units = "unitless" ;
+		displar:coordinates = "pftname" ;
+	double dleaf(pft) ;
+		dleaf:long_name = "Characteristic leaf dimension" ;
+		dleaf:units = "m" ;
+		dleaf:coordinates = "pftname" ;
+	double dsladlai(pft) ;
+		dsladlai:long_name = "Through canopy, projected area basis: dSLA/dLAI" ;
+		dsladlai:units = "m^2/gC" ;
+		dsladlai:coordinates = "pftname" ;
+	double evergreen(pft) ;
+		evergreen:long_name = "Binary flag for evergreen leaf habit" ;
+		evergreen:units = "logical flag" ;
+		evergreen:coordinates = "pftname" ;
+		evergreen:flag_meanings = "NON-evergreen evergreen" ;
+		evergreen:flag_values = 0., 1. ;
+	double fcur(pft) ;
+		fcur:long_name = "Allocation parameter: fraction of allocation that goes to currently displayed growth, remainder to storage" ;
+		fcur:units = "fraction" ;
+		fcur:coordinates = "pftname" ;
+	double fcurdv(pft) ;
+		fcurdv:long_name = "Alternate fcur for use with CNDV" ;
+		fcurdv:units = "fraction" ;
+		fcurdv:coordinates = "pftname" ;
+	double fd_pft(pft) ;
+		fd_pft:units = "hr" ;
+		fd_pft:long_name = "Fire duration" ;
+		fd_pft:_FillValue = -999.99 ;
+	double fertnitro(pft) ;
+		fertnitro:long_name = "Max fertilizer to be applied in total" ;
+		fertnitro:units = "kg N/m2" ;
+		fertnitro:coordinates = "pftname" ;
+	double ffrootcn(pft) ;
+		ffrootcn:long_name = "Fine root C:N during organ fill" ;
+		ffrootcn:units = "gC/gN" ;
+		ffrootcn:coordinates = "pftname" ;
+	double fleafcn(pft) ;
+		fleafcn:long_name = "Leaf C:N during organ fill" ;
+		fleafcn:units = "gC/gN" ;
+		fleafcn:coordinates = "pftname" ;
+	double fleafi(pft) ;
+		fleafi:long_name = "Leaf Allocation coefficient parameter fraction used in CNAllocation" ;
+		fleafi:units = "unitless" ;
+		fleafi:_FillValue = 0. ;
+		fleafi:coordinates = "pftname" ;
+	double flivewd(pft) ;
+		flivewd:long_name = "Allocation parameter: fraction of new wood that is live (phloem and ray parenchyma)" ;
+		flivewd:units = "fraction" ;
+		flivewd:coordinates = "pftname" ;
+	double flnr(pft) ;
+		flnr:long_name = "Fraction of leaf N in Rubisco enzyme" ;
+		flnr:units = "fraction" ;
+		flnr:coordinates = "pftname" ;
+	double fm_droot(pft) ;
+		fm_droot:units = "0 to 1" ;
+		fm_droot:long_name = "Fire-related mortality factor for dead roots" ;
+		fm_droot:_FillValue = -999.99 ;
+	double fm_dstem(pft) ;
+		fm_dstem:units = "0 to 1" ;
+		fm_dstem:long_name = "Fire-related mortality factor for dead stem" ;
+		fm_dstem:_FillValue = -999.99 ;
+	double fm_leaf(pft) ;
+		fm_leaf:units = "0 to 1" ;
+		fm_leaf:long_name = "Fire-related mortality factor for leaf" ;
+		fm_leaf:_FillValue = -999.99 ;
+	double fm_lroot(pft) ;
+		fm_lroot:units = "0 to 1" ;
+		fm_lroot:long_name = "Fire-related mortality factor for live roots" ;
+		fm_lroot:_FillValue = -999.99 ;
+	double fm_lstem(pft) ;
+		fm_lstem:units = "0 to 1" ;
+		fm_lstem:long_name = "Fire-related mortality factor for live stem" ;
+		fm_lstem:_FillValue = -999.99 ;
+	double fm_other(pft) ;
+		fm_other:units = "0 to 1" ;
+		fm_other:long_name = "Fire-related mortality factor for other plant" ;
+		fm_other:_FillValue = -999.99 ;
+	double fm_root(pft) ;
+		fm_root:units = "0 to 1" ;
+		fm_root:long_name = "Fire-related mortality factor for fine roots" ;
+		fm_root:_FillValue = -999.99 ;
+	double fnitr(pft) ;
+		fnitr:long_name = "Foliage nitrogen limitation factor" ;
+		fnitr:units = "unitless" ;
+		fnitr:coordinates = "pftname" ;
+	double fr_fcel(pft) ;
+		fr_fcel:long_name = "Fine root litter cellulose fraction" ;
+		fr_fcel:units = "fraction" ;
+		fr_fcel:coordinates = "pftname" ;
+	double fr_flab(pft) ;
+		fr_flab:long_name = "Fine root litter labile fraction" ;
+		fr_flab:units = "fraction" ;
+		fr_flab:coordinates = "pftname" ;
+	double fr_flig(pft) ;
+		fr_flig:long_name = "Fine root litter lignin fraction" ;
+		fr_flig:units = "fraction" ;
+		fr_flig:coordinates = "pftname" ;
+	double froot_leaf(pft) ;
+		froot_leaf:long_name = "Allocation parameter: new fine root C per new leaf C" ;
+		froot_leaf:units = "gC/gC" ;
+		froot_leaf:coordinates = "pftname" ;
+	double frootcn(pft) ;
+		frootcn:long_name = "Fine root C:N" ;
+		frootcn:units = "gC/gN" ;
+		frootcn:coordinates = "pftname" ;
+	double fsr_pft(pft) ;
+		fsr_pft:units = "m/s" ;
+		fsr_pft:long_name = "Fire spread rate" ;
+		fsr_pft:_FillValue = -999.99 ;
+	double fstemcn(pft) ;
+		fstemcn:long_name = "Stem C:N during organ fill" ;
+		fstemcn:units = "gC/gN" ;
+		fstemcn:coordinates = "pftname" ;
+	double gddmin(pft) ;
+		gddmin:long_name = "Minimim growing degree days used in CNPhenology" ;
+		gddmin:units = "unitless" ;
+		gddmin:_FillValue = 0. ;
+		gddmin:coordinates = "pftname" ;
+	double graincn(pft) ;
+		graincn:long_name = "Grain C:N" ;
+		graincn:units = "gC/gN" ;
+		graincn:_FillValue = 0. ;
+		graincn:coordinates = "pftname" ;
+	double grnfill(pft) ;
+		grnfill:long_name = "Grain fill parameter used in CNPhenology" ;
+		grnfill:units = "unitless" ;
+		grnfill:_FillValue = 0. ;
+		grnfill:coordinates = "pftname" ;
+	double grperc(pft) ;
+		grperc:long_name = "Growth respiration factor" ;
+		grperc:units = "unitless" ;
+		grperc:coordinates = "pftname" ;
+	double grpnow(pft) ;
+		grpnow:long_name = "Growth respiration factor" ;
+		grpnow:units = "unitless" ;
+		grpnow:coordinates = "pftname" ;
+	double hybgdd(pft) ;
+		hybgdd:long_name = "Growing Degree Days for maturity used in CNPhenology" ;
+		hybgdd:units = "unitless" ;
+		hybgdd:_FillValue = 0. ;
+		hybgdd:coordinates = "pftname" ;
+	double irrigated(pft) ;
+		irrigated:long_name = "Binary Irrigated PFT flag" ;
+		irrigated:units = "logical flag" ;
+		irrigated:coordinates = "pftname" ;
+		irrigated:valid_range = 0., 1. ;
+		irrigated:flag_meanings = "NOT_irrigated irrigated" ;
+		irrigated:flag_values = 0., 1. ;
+	double laimx(pft) ;
+		laimx:long_name = "Maximum Leaf Area Index used in CNVegStructUpdate" ;
+		laimx:units = "unitless" ;
+		laimx:_FillValue = 0. ;
+		laimx:coordinates = "pftname" ;
+	double leaf_long(pft) ;
+		leaf_long:long_name = "Leaf longevity" ;
+		leaf_long:units = "years" ;
+		leaf_long:coordinates = "pftname" ;
+	double leafcn(pft) ;
+		leafcn:long_name = "Leaf C:N" ;
+		leafcn:units = "gC/gN" ;
+		leafcn:coordinates = "pftname" ;
+	double lf_fcel(pft) ;
+		lf_fcel:long_name = "Leaf litter cellulose fraction" ;
+		lf_fcel:units = "fraction" ;
+		lf_fcel:coordinates = "pftname" ;
+	double lf_flab(pft) ;
+		lf_flab:long_name = "Leaf litter labile fraction" ;
+		lf_flab:units = "fraction" ;
+		lf_flab:coordinates = "pftname" ;
+	double lf_flig(pft) ;
+		lf_flig:long_name = "Leaf litter lignin fraction" ;
+		lf_flig:units = "fraction" ;
+		lf_flig:coordinates = "pftname" ;
+	double lfemerg(pft) ;
+		lfemerg:long_name = "Leaf emergence parameter used in CNPhenology" ;
+		lfemerg:units = "unitless" ;
+		lfemerg:_FillValue = 0. ;
+		lfemerg:coordinates = "pftname" ;
+	double lflitcn(pft) ;
+		lflitcn:long_name = "Leaf litter C:N" ;
+		lflitcn:units = "gC/gN" ;
+		lflitcn:coordinates = "pftname" ;
+	double livewdcn(pft) ;
+		livewdcn:long_name = "Live wood (phloem and ray parenchyma) C:N" ;
+		livewdcn:units = "gC/gN" ;
+		livewdcn:coordinates = "pftname" ;
+	int max_NH_planting_date(pft) ;
+		max_NH_planting_date:_FillValue = 0 ;
+		max_NH_planting_date:long_name = "Maximum planting date for the Northern Hemipsphere" ;
+		max_NH_planting_date:units = "YYYYMMDD" ;
+		max_NH_planting_date:coordinates = "pftname" ;
+		max_NH_planting_date:comment = "Typical U.S. latest planting dates according to AgroIBIS: Maize May 10th; soybean Jun 20th; spring wheat mid-May; winter wheat early Nov." ;
+	int max_SH_planting_date(pft) ;
+		max_SH_planting_date:_FillValue = 0 ;
+		max_SH_planting_date:long_name = "Maximum planting date for the Southern Hemipsphere" ;
+		max_SH_planting_date:units = "YYYYMMDD" ;
+		max_SH_planting_date:coordinates = "pftname" ;
+		max_SH_planting_date:comment = "Same as max_NH_planting_date, but offset by six months" ;
+	int min_NH_planting_date(pft) ;
+		min_NH_planting_date:_FillValue = 0 ;
+		min_NH_planting_date:long_name = "Minimum planting date for the Northern Hemipsphere" ;
+		min_NH_planting_date:units = "YYYYMMDD" ;
+		min_NH_planting_date:coordinates = "pftname" ;
+		min_NH_planting_date:comment = "Typical U.S. earliest planting dates according to AgroIBIS: Maize Apr 10th; soybean May 15th; spring wheat early Apr; winter wheat Sep 1st" ;
+	int min_SH_planting_date(pft) ;
+		min_SH_planting_date:_FillValue = 0 ;
+		min_SH_planting_date:long_name = "Minimum planting date for the Southern Hemipsphere" ;
+		min_SH_planting_date:units = "YYYYMMDD" ;
+		min_SH_planting_date:coordinates = "pftname" ;
+		min_SH_planting_date:comment = "Same as min_NH_planting_date, but offset by six months" ;
+	double min_planting_temp(pft) ;
+		min_planting_temp:long_name = "Average 5 day daily minimum temperature needed for planting" ;
+		min_planting_temp:units = "K" ;
+		min_planting_temp:coordinates = "pftname" ;
+		min_planting_temp:_FillValue = 1000. ;
+		min_planting_temp:comment = "From AGROIBIS derived from EPIC model parameterizations" ;
+	int mxmat(pft) ;
+		mxmat:_FillValue = 0 ;
+		mxmat:long_name = "Maximum number of days to maturity parameter in CNPhenology" ;
+		mxmat:units = "days" ;
+		mxmat:coordinates = "pftname" ;
+	double mxtmp(pft) ;
+		mxtmp:long_name = "Max Temperature, parameter used in accFlds" ;
+		mxtmp:units = "C" ;
+		mxtmp:_FillValue = 0. ;
+	double pconv(pft) ;
+		pconv:long_name = "Deadstem proportions to send to conversion flux" ;
+		pconv:units = "fraction" ;
+		pconv:coordinates = "pftname" ;
+		pconv:valid_range = 0., 1. ;
+		pconv:comment = "pconv+pprod10+pprod100 must sum to 1.0" ;
+	char pftname(pft, string_length) ;
+		pftname:long_name = "Description of plant type" ;
+		pftname:units = "unitless" ;
+	short pftnum(pft) ;
+		pftnum:long_name = "Plant Functional Type number" ;
+		pftnum:units = "unitless" ;
+		pftnum:coordinates = "pftname" ;
+	double pftpar20(pft) ;
+		pftpar20:long_name = "Tree maximum crown area" ;
+		pftpar20:units = "m2" ;
+		pftpar20:_FillValue = 9999.9 ;
+		pftpar20:coordinates = "pftname" ;
+	double pftpar28(pft) ;
+		pftpar28:long_name = "Minimum coldest monthly mean temperature" ;
+		pftpar28:units = "degrees_Celsius" ;
+		pftpar28:_FillValue = 9999.9 ;
+		pftpar28:coordinates = "pftname" ;
+	double pftpar29(pft) ;
+		pftpar29:long_name = "Maximum coldest monthly mean temperature" ;
+		pftpar29:units = "degrees_Celsius" ;
+		pftpar29:_FillValue = 1000. ;
+		pftpar29:coordinates = "pftname" ;
+	double pftpar30(pft) ;
+		pftpar30:long_name = "Minimum growing degree days (>= 5 degree Celsius)" ;
+		pftpar30:units = "degree_C_days" ;
+		pftpar30:coordinates = "pftname" ;
+	double pftpar31(pft) ;
+		pftpar31:long_name = "Upper limit of temperature of the warmest month (twmax)" ;
+		pftpar31:units = "degrees_Celsius" ;
+		pftpar31:_FillValue = 1000. ;
+		pftpar31:coordinates = "pftname" ;
+	double planting_temp(pft) ;
+		planting_temp:long_name = "Average 10 day temperature needed for planting" ;
+		planting_temp:units = "K" ;
+		planting_temp:coordinates = "pftname" ;
+		planting_temp:_FillValue = 1000. ;
+		planting_temp:comment = "From AGROIBIS derived from EPIC model parameterizations" ;
+	double pprod10(pft) ;
+		pprod10:long_name = "Deadstem proportions to send to 10 year product pool" ;
+		pprod10:units = "fraction" ;
+		pprod10:coordinates = "pftname" ;
+		pprod10:valid_range = 0., 1. ;
+		pprod10:comment = "pconv+pprod10+pprod100 must sum to 1.0" ;
+	double pprod100(pft) ;
+		pprod100:long_name = "Deadstem proportions to send to 100 year product pool" ;
+		pprod100:units = "fraction" ;
+		pprod100:coordinates = "pftname" ;
+		pprod100:valid_range = 0., 1. ;
+		pprod100:comment = "pconv+pprod10+pprod100 must sum to 1.0" ;
+	double pprodharv10(pft) ;
+		pprodharv10:long_name = "Deadstem proportions to send to 10 year harvest pool" ;
+		pprodharv10:units = "fraction" ;
+		pprodharv10:coordinates = "pftname" ;
+		pprodharv10:_FillValue = 0. ;
+		pprodharv10:valid_range = 0., 1. ;
+		pprodharv10:comment = "100 year harvest is one minus this value" ;
+	double rholnir(pft) ;
+		rholnir:long_name = "Leaf reflectance: near-IR" ;
+		rholnir:units = "fraction" ;
+		rholnir:coordinates = "pftname" ;
+	double rholvis(pft) ;
+		rholvis:long_name = "Leaf reflectance: visible" ;
+		rholvis:units = "fraction" ;
+		rholvis:coordinates = "pftname" ;
+	double rhosnir(pft) ;
+		rhosnir:long_name = "Stem reflectance: near-IR" ;
+		rhosnir:units = "fraction" ;
+		rhosnir:coordinates = "pftname" ;
+	double rhosvis(pft) ;
+		rhosvis:long_name = "Stem reflectance: visible" ;
+		rhosvis:units = "fraction" ;
+		rhosvis:coordinates = "pftname" ;
+	double roota_par(pft) ;
+		roota_par:long_name = "CLM rooting distribution parameter" ;
+		roota_par:units = "1/m" ;
+		roota_par:coordinates = "pftname" ;
+	double rootb_par(pft) ;
+		rootb_par:long_name = "CLM rooting distribution parameter" ;
+		rootb_par:units = "1/m" ;
+		rootb_par:coordinates = "pftname" ;
+	double rootprof_beta(pft) ;
+		rootprof_beta:long_name = "Rooting beta parameter, for C and N vertical discretization" ;
+		rootprof_beta:units = "unitless" ;
+	double season_decid(pft) ;
+		season_decid:long_name = "Binary flag for seasonal-deciduous leaf habit" ;
+		season_decid:units = "logical flag" ;
+		season_decid:coordinates = "pftname" ;
+		season_decid:flag_meanings = "NOT seasonal-deciduous" ;
+		season_decid:flag_values = 0., 1. ;
+	double slatop(pft) ;
+		slatop:long_name = "Specific Leaf Area (SLA) at top of canopy, projected area basis" ;
+		slatop:units = "m^2/gC" ;
+		slatop:coordinates = "pftname" ;
+	double smpsc(pft) ;
+		smpsc:long_name = "Soil water potential at full stomatal closure" ;
+		smpsc:units = "mm" ;
+		smpsc:coordinates = "pftname" ;
+	double smpso(pft) ;
+		smpso:long_name = "Soil water potential at full stomatal opening" ;
+		smpso:units = "mm" ;
+		smpso:coordinates = "pftname" ;
+	double stem_leaf(pft) ;
+		stem_leaf:long_name = "Allocation parameter: new stem C per new leaf C (-1 means use dynamic stem allocation)" ;
+		stem_leaf:units = "gC/gC" ;
+		stem_leaf:coordinates = "pftname" ;
+	double stress_decid(pft) ;
+		stress_decid:long_name = "Binary flag for stress-deciduous leaf habit" ;
+		stress_decid:units = "logical flag" ;
+		stress_decid:coordinates = "pftname" ;
+		stress_decid:valid_range = 0., 1. ;
+		stress_decid:flag_values = 0., 1. ;
+		stress_decid:flag_meanings = "NOT stress_decidious" ;
+	double taulnir(pft) ;
+		taulnir:long_name = "Leaf transmittance: near-IR" ;
+		taulnir:units = "fraction" ;
+		taulnir:coordinates = "pftname" ;
+	double taulvis(pft) ;
+		taulvis:long_name = "Leaf transmittance: visible" ;
+		taulvis:units = "fraction" ;
+		taulvis:coordinates = "pftname" ;
+	double tausnir(pft) ;
+		tausnir:long_name = "Stem transmittance: near-IR" ;
+		tausnir:units = "fraction" ;
+		tausnir:coordinates = "pftname" ;
+	double tausvis(pft) ;
+		tausvis:long_name = "Stem transmittance: visible" ;
+		tausvis:units = "fraction" ;
+		tausvis:coordinates = "pftname" ;
+	double woody(pft) ;
+		woody:long_name = "Binary woody lifeform flag" ;
+		woody:units = "logical flag" ;
+		woody:coordinates = "pftname" ;
+		woody:valid_range = 0., 1. ;
+		woody:flag_values = 0., 1. ;
+		woody:flag_meanings = "NON_woody woody" ;
+	double xl(pft) ;
+		xl:long_name = "Leaf/stem orientation index" ;
+		xl:units = "unitless" ;
+		xl:coordinates = "pftname" ;
+		xl:valid_range = -1., 1. ;
+	double z0mr(pft) ;
+		z0mr:long_name = "Ratio of momentum roughness length to canopy top height" ;
+		z0mr:units = "unitless" ;
+		z0mr:coordinates = "pftname" ;
+	double ztopmx(pft) ;
+		ztopmx:long_name = "Canopy top coefficient used in CNVegStructUpdate" ;
+		ztopmx:units = "m" ;
+		ztopmx:_FillValue = 0. ;
+		ztopmx:coordinates = "pftname" ;
+	double atmch4(allpfts) ;
+		atmch4:long_name = "Atmospheric CH4 mixing ratio to prescribe if not provided by the atmospheric model" ;
+		atmch4:units = "mol/mol" ;
+	double bdnr(allpfts) ;
+		bdnr:long_name = "bulk denitrification rate" ;
+		bdnr:units = "1/day" ;
+	double br_mr(allpfts) ;
+		br_mr:long_name = "Base rate for maintenance respiration" ;
+		br_mr:units = "gC/gN/s" ;
+	double capthick(allpfts) ;
+		capthick:long_name = "Minimum thickness before assuming h2osfc is impermeable" ;
+		capthick:units = "mm" ;
+	double cn_s1(allpfts) ;
+		cn_s1:long_name = "C:N for SOM pool 1" ;
+		cn_s1:units = "gC/gN" ;
+	double cn_s1_bgc(allpfts) ;
+		cn_s1_bgc:long_name = "C:N for SOM 1" ;
+		cn_s1_bgc:units = "unitless" ;
+	double cn_s2(allpfts) ;
+		cn_s2:long_name = "C:N for SOM pool 2" ;
+		cn_s2:units = "gC/gN" ;
+	double cn_s2_bgc(allpfts) ;
+		cn_s2_bgc:long_name = "C:N for SOM pool 2" ;
+		cn_s2_bgc:units = "gC/gN" ;
+	double cn_s3(allpfts) ;
+		cn_s3:long_name = "C:N for SOM pool 3" ;
+		cn_s3:units = "gC/gN" ;
+	double cn_s3_bgc(allpfts) ;
+		cn_s3_bgc:long_name = "C:N for SOM pool 3" ;
+		cn_s3_bgc:units = "gC/gN" ;
+	double cn_s4(allpfts) ;
+		cn_s4:long_name = "C:N for SOM pool 4" ;
+		cn_s4:units = "gC/gN" ;
+	double cnscalefactor(allpfts) ;
+		cnscalefactor:long_name = "Scale factor on CN decomposition for assigning methane flux" ;
+		cnscalefactor:units = "unitless" ;
+	double compet_decomp_nh4(allpfts) ;
+		compet_decomp_nh4:long_name = "Relative competitiveness of immobilizers for NH4" ;
+		compet_decomp_nh4:units = "unitless" ;
+	double compet_decomp_no3(allpfts) ;
+		compet_decomp_no3:long_name = "Relative competitiveness of immobilizers for NO3" ;
+		compet_decomp_no3:units = "unitless" ;
+	double compet_denit(allpfts) ;
+		compet_denit:long_name = "Relative competitiveness of denitrifiers for NO3" ;
+		compet_denit:units = "unitless" ;
+	double compet_nit(allpfts) ;
+		compet_nit:long_name = "Relative competitiveness of nitrifiers for NH4" ;
+		compet_nit:units = "unitless" ;
+	double compet_plant_nh4(allpfts) ;
+		compet_plant_nh4:long_name = "Relative compettiveness of plants for NH4" ;
+		compet_plant_nh4:units = "unitless" ;
+	double compet_plant_no3(allpfts) ;
+		compet_plant_no3:long_name = "Relative compettiveness of plants for NO3" ;
+		compet_plant_no3:units = "unitless" ;
+	double crit_dayl(allpfts) ;
+		crit_dayl:long_name = "Critical day length for senescence" ;
+		crit_dayl:units = "seconds" ;
+	double crit_offset_fdd(allpfts) ;
+		crit_offset_fdd:long_name = "Critical number of freezing days to initiate offset" ;
+		crit_offset_fdd:units = "days" ;
+	double crit_offset_swi(allpfts) ;
+		crit_offset_swi:long_name = "Critical number of water stress days to initiate offset" ;
+		crit_offset_swi:units = "days" ;
+	double crit_onset_fdd(allpfts) ;
+		crit_onset_fdd:long_name = "Critical number of freezing days to set gdd counter" ;
+		crit_onset_fdd:units = "days" ;
+	double crit_onset_swi(allpfts) ;
+		crit_onset_swi:long_name = "Critical number of days > soilpsi_on for onset" ;
+		crit_onset_swi:units = "days" ;
+	double cryoturb_diffusion_k(allpfts) ;
+		cryoturb_diffusion_k:long_name = "The cryoturbation diffusive constant for vertical mixing of SOM" ;
+		cryoturb_diffusion_k:units = "m^2/sec" ;
+	double cwd_fcel(allpfts) ;
+		cwd_fcel:long_name = "Cellulose fraction for CWD" ;
+		cwd_fcel:units = "unitless" ;
+	double cwd_flig(allpfts) ;
+		cwd_flig:long_name = "Lignin fraction of coarse woody debris" ;
+		cwd_flig:units = "unitless" ;
+	double dayscrecover(allpfts) ;
+		dayscrecover:long_name = "days to recover negative cpool" ;
+		dayscrecover:units = "unitless" ;
+	double decomp_depth_efolding(allpfts) ;
+		decomp_depth_efolding:long_name = "e-folding depth for reduction in decomposition. Sset to large number for depth-independance" ;
+		decomp_depth_efolding:units = "m" ;
+	double depth_runoff_Nloss(allpfts) ;
+		depth_runoff_Nloss:long_name = "Depth over which runoff mixes with soil water for N loss to runoff" ;
+		depth_runoff_Nloss:units = "m" ;
+	double dnp(allpfts) ;
+		dnp:long_name = "Denitrification proportion" ;
+		dnp:units = "unitless" ;
+	double ef_time(allpfts) ;
+		ef_time:long_name = "e-folding time constant" ;
+		ef_time:units = "years" ;
+	double f_ch4(allpfts) ;
+		f_ch4:long_name = "Ratio of CH4 production to total C mineralization" ;
+		f_ch4:units = "unitless" ;
+	double f_sat(allpfts) ;
+		f_sat:long_name = "Volumetric soil water defining top of water table or where production is allowed" ;
+		f_sat:units = "unitless" ;
+	double froz_q10(allpfts) ;
+		froz_q10:long_name = "Separate q10 for frozen soil respiration rates" ;
+		froz_q10:units = "unitless" ;
+	double fstor2tran(allpfts) ;
+		fstor2tran:long_name = "Fraction of storage to move to transfer for each onset" ;
+		fstor2tran:units = "unitless" ;
+	double gddfunc_p1(allpfts) ;
+		gddfunc_p1:long_name = "Parameter 1 to calculate GDD threshold as fn of annual T" ;
+		gddfunc_p1:units = "unitless" ;
+	double gddfunc_p2(allpfts) ;
+		gddfunc_p2:long_name = "Parameter 2 to calculate GDD threshold as fn of annual T" ;
+		gddfunc_p2:units = "unitless" ;
+	double highlatfact(allpfts) ;
+		highlatfact:long_name = "Multiple of qflxlagd for high latitudes" ;
+		highlatfact:units = "unitless" ;
+	double k_frag(allpfts) ;
+		k_frag:long_name = "Fragmentation rate for CWD" ;
+		k_frag:units = "1/day" ;
+	double k_l1(allpfts) ;
+		k_l1:long_name = "Decomposition rate for litter 1" ;
+		k_l1:units = "1/day" ;
+	double k_l2(allpfts) ;
+		k_l2:long_name = "Decomposition rate for litter 2" ;
+		k_l2:units = "1/day" ;
+	double k_l3(allpfts) ;
+		k_l3:long_name = "Decomposition rate for litter 3" ;
+		k_l3:units = "1/day" ;
+	double k_m(allpfts) ;
+		k_m:long_name = "Michaelis-Menten oxidation rate constant for CH4 concentration" ;
+		k_m:units = "mol/m3-w" ;
+	double k_m_o2(allpfts) ;
+		k_m_o2:long_name = "Michaelis-Menten oxidation rate constant for O2 concentration" ;
+		k_m_o2:units = "mol/m3-w" ;
+	double k_m_unsat(allpfts) ;
+		k_m_unsat:long_name = "Michaelis-Menten oxidation rate constant for CH4 concentration" ;
+		k_m_unsat:units = "mol/m3-w" ;
+	double k_mort(allpfts) ;
+		k_mort:long_name = "Coefficient of growth efficiency in mortality equation" ;
+		k_mort:units = "unitless" ;
+	double k_nitr_max(allpfts) ;
+		k_nitr_max:long_name = "Maximum nitrification rate constant" ;
+		k_nitr_max:units = "1/sec" ;
+	double k_s1(allpfts) ;
+		k_s1:long_name = "Decomposition rate for SOM 1" ;
+		k_s1:units = "1/day" ;
+	double k_s2(allpfts) ;
+		k_s2:long_name = "Decomposition rate for SOM 2" ;
+		k_s2:units = "1/day" ;
+	double k_s3(allpfts) ;
+		k_s3:long_name = "Decomposition rate for SOM 3" ;
+		k_s3:units = "1/day" ;
+	double k_s4(allpfts) ;
+		k_s4:long_name = "Decomposition rate for SOM 4" ;
+		k_s4:units = "1/day" ;
+	double lake_decomp_fact(allpfts) ;
+		lake_decomp_fact:long_name = "Base decomposition rate (1/s) at 25oC in lake" ;
+		lake_decomp_fact:units = "1/s" ;
+	double lwtop_ann(allpfts) ;
+		lwtop_ann:long_name = "Live wood turnover proportion" ;
+		lwtop_ann:units = "unitless" ;
+	double max_altdepth_cryoturbation(allpfts) ;
+		max_altdepth_cryoturbation:long_name = "Maximum active layer thickness for cryoturbation to occur" ;
+		max_altdepth_cryoturbation:units = "m" ;
+	double max_altmultiplier_cryoturb(allpfts) ;
+		max_altmultiplier_cryoturb:long_name = "Ratio of the maximum extent of cryoturbation to the active layer thickness" ;
+		max_altmultiplier_cryoturb:units = "unitless" ;
+	double me_herb(allpfts) ;
+		me_herb:long_name = "Moisture of extinction for herbaceous PFTs (proportion)" ;
+		me_herb:units = "unitless" ;
+	double me_woody(allpfts) ;
+		me_woody:long_name = "Moisture of extinction for woody PFTs (proportion)" ;
+		me_woody:units = "unitless" ;
+	double minfuel(allpfts) ;
+		minfuel:long_name = "Dead fuel threshold to carry a fire" ;
+		minfuel:units = "gC/m2" ;
+	double minpsi_hr(allpfts) ;
+		minpsi_hr:long_name = "Minimum soil water potential for heterotrophic resp" ;
+		minpsi_hr:units = "MPa" ;
+	double ndays_off(allpfts) ;
+		ndays_off:long_name = "Number of days to complete leaf offset" ;
+		ndays_off:units = "days" ;
+	double ndays_on(allpfts) ;
+		ndays_on:long_name = "Number of days to complete leaf onset" ;
+		ndays_on:units = "days" ;
+	double nongrassporosratio(allpfts) ;
+		nongrassporosratio:long_name = "Ratio of root porosity in non-grass to grass, used for aerenchyma transport" ;
+		nongrassporosratio:units = "unitless" ;
+	double organic_max(allpfts) ;
+		organic_max:long_name = "Organic matter content where soil is assumed to act like peat for diffusion" ;
+		organic_max:units = "kg/m3" ;
+	double oxinhib(allpfts) ;
+		oxinhib:long_name = "Inhibition of methane production by oxygen" ;
+		oxinhib:units = "m^3/mol" ;
+	double pHmax(allpfts) ;
+		pHmax:long_name = "Maximum pH for methane production" ;
+		pHmax:units = "unitless" ;
+	double pHmin(allpfts) ;
+		pHmin:long_name = "Minimum pH for methane production" ;
+		pHmin:units = "unitless" ;
+	double porosmin(allpfts) ;
+		porosmin:long_name = "Minimum aerenchyma porosity" ;
+		porosmin:units = "unitless" ;
+	double q10_ch4oxid(allpfts) ;
+		q10_ch4oxid:long_name = "Q10 oxidation constant" ;
+		q10_ch4oxid:units = "unitless" ;
+	double q10_hr(allpfts) ;
+		q10_hr:long_name = "Q10 for heterotrophic respiration" ;
+		q10_hr:units = "unitless" ;
+	double q10_mr(allpfts) ;
+		q10_mr:long_name = "Q10 for maintenance respiration" ;
+		q10_mr:units = "unitless" ;
+	double q10ch4(allpfts) ;
+		q10ch4:long_name = "Q10 for methane production" ;
+		q10ch4:units = "unitless" ;
+	double q10lakebase(allpfts) ;
+		q10lakebase:long_name = "Base temperature for lake CH4 production" ;
+		q10lakebase:units = "K" ;
+	double qflxlagd(allpfts) ;
+		qflxlagd:long_name = "Days to lag time-lagged surface runoff (qflx_surf_lag) in the tropics" ;
+		qflxlagd:units = "days" ;
+	double r_mort(allpfts) ;
+		r_mort:long_name = "Mortality rate" ;
+		r_mort:units = "1/year" ;
+	double rc_npool(allpfts) ;
+		rc_npool:long_name = "resistance for uptake from plant n pool" ;
+		rc_npool:units = "unitless" ;
+	double redoxlag(allpfts) ;
+		redoxlag:long_name = "Number of days to lag in the calculation of finundated_lag" ;
+		redoxlag:units = "days" ;
+	double redoxlag_vertical(allpfts) ;
+		redoxlag_vertical:long_name = "Time lag (days) to inhibit production for newly unsaturated layers" ;
+		redoxlag_vertical:units = "days" ;
+	double rf_cwdl2_bgc(allpfts) ;
+		rf_cwdl2_bgc:long_name = "respiration fraction from CWD to litter 2" ;
+		rf_cwdl2_bgc:units = "unitless" ;
+	double rf_cwdl3_bgc(allpfts) ;
+		rf_cwdl3_bgc:long_name = "respiration fraction from CWD to litter 3" ;
+		rf_cwdl3_bgc:units = "unitless" ;
+	double rf_l1s1(allpfts) ;
+		rf_l1s1:long_name = "Respiration fraction for litter 1 -> SOM 1" ;
+		rf_l1s1:units = "unitless" ;
+	double rf_l1s1_bgc(allpfts) ;
+		rf_l1s1_bgc:long_name = "Respiration fraction for litter 1 -> SOM 1" ;
+		rf_l1s1_bgc:units = "unitless" ;
+	double rf_l2s1_bgc(allpfts) ;
+		rf_l2s1_bgc:long_name = "respiration fraction litter 2 to SOM 1" ;
+		rf_l2s1_bgc:units = "unitless" ;
+	double rf_l2s2(allpfts) ;
+		rf_l2s2:long_name = "Respiration fraction for litter 2 -> SOM 2" ;
+		rf_l2s2:units = "unitless" ;
+	double rf_l3s2_bgc(allpfts) ;
+		rf_l3s2_bgc:long_name = "respiration fraction from litter 3 to SOM 2" ;
+		rf_l3s2_bgc:units = "unitless" ;
+	double rf_l3s3(allpfts) ;
+		rf_l3s3:long_name = "Respiration fraction for litter 3 -> SOM 3" ;
+		rf_l3s3:units = "unitless" ;
+	double rf_s1s2(allpfts) ;
+		rf_s1s2:long_name = "Respiration fraction for SOM 1 -> SOM 2" ;
+		rf_s1s2:units = "unitless" ;
+	double rf_s2s1_bgc(allpfts) ;
+		rf_s2s1_bgc:long_name = "respiration fraction SOM 2 to SOM 1" ;
+		rf_s2s1_bgc:units = "unitless" ;
+	double rf_s2s3(allpfts) ;
+		rf_s2s3:long_name = "Respiration fraction for SOM 2 -> SOM 3" ;
+		rf_s2s3:units = "unitless" ;
+	double rf_s2s3_bgc(allpfts) ;
+		rf_s2s3_bgc:long_name = "Respiration fraction for SOM 2 -> SOM 3" ;
+		rf_s2s3_bgc:units = "unitless" ;
+	double rf_s3s1_bgc(allpfts) ;
+		rf_s3s1_bgc:long_name = "respiration fraction SOM 3 to SOM 1" ;
+		rf_s3s1_bgc:units = "unitless" ;
+	double rf_s3s4(allpfts) ;
+		rf_s3s4:long_name = "Respiration fraction for SOM 3 -> SOM 4" ;
+		rf_s3s4:units = "unitless" ;
+	double rij_kro_a(allpfts) ;
+		rij_kro_a:long_name = "Best-fit parameter of simple-structure model (Arah and Vinten 1995)" ;
+		rij_kro_a:units = "unitless" ;
+	double rij_kro_alpha(allpfts) ;
+		rij_kro_alpha:long_name = "Simple-structure model parameter (Arah and Vinten 1995)" ;
+		rij_kro_alpha:units = "unitless" ;
+	double rij_kro_beta(allpfts) ;
+		rij_kro_beta:long_name = "Simple-structure model parameter (Arah and Vinten 1995)" ;
+		rij_kro_beta:units = "unitless" ;
+	double rij_kro_delta(allpfts) ;
+		rij_kro_delta:long_name = "Simple-structure model parameter (Arah and Vinten 1995)" ;
+		rij_kro_delta:units = "unitless" ;
+	double rij_kro_gamma(allpfts) ;
+		rij_kro_gamma:long_name = "Simple-structure model parameter (Arah and Vinten 1995)" ;
+		rij_kro_gamma:units = "unitless" ;
+	double rob(allpfts) ;
+		rob:long_name = "Ratio of root length to vertical depth (root obliquity)" ;
+		rob:units = "unitless" ;
+	double rootlitfrac(allpfts) ;
+		rootlitfrac:long_name = "Fraction of soil organic matter associated with roots" ;
+		rootlitfrac:units = "unitless" ;
+	double satpow(allpfts) ;
+		satpow:long_name = "Exponent on watsat for saturated soil solute diffusion" ;
+		satpow:units = "unitless" ;
+	double scale_factor_aere(allpfts) ;
+		scale_factor_aere:long_name = "Scale factor on the aerenchyma area for sensitivity tests" ;
+		scale_factor_aere:units = "unitless" ;
+	double scale_factor_gasdiff(allpfts) ;
+		scale_factor_gasdiff:long_name = "Scale factor for gas diffusion" ;
+		scale_factor_gasdiff:units = "unitless" ;
+	double scale_factor_liqdiff(allpfts) ;
+		scale_factor_liqdiff:long_name = "Scale factor for solute diffusion in liquid (water)" ;
+		scale_factor_liqdiff:units = "unitless" ;
+	double sf_minn(allpfts) ;
+		sf_minn:long_name = "Soluble fraction of mineral N" ;
+		sf_minn:units = "unitless" ;
+	double sf_no3(allpfts) ;
+		sf_no3:long_name = "Soluble fraction of NO3" ;
+		sf_no3:units = "unitless" ;
+	double smp_crit(allpfts) ;
+		smp_crit:long_name = "Critical soil moisture potential to reduce oxidation (mm) due to dessication of methanotrophs above the water table" ;
+		smp_crit:units = "mm" ;
+	double soilpsi_off(allpfts) ;
+		soilpsi_off:long_name = "Critical soil water potential for leaf offset" ;
+		soilpsi_off:units = "MPa" ;
+	double soilpsi_on(allpfts) ;
+		soilpsi_on:long_name = "Critical soil water potential for leaf onset" ;
+		soilpsi_on:units = "MPa" ;
+	double som_diffus(allpfts) ;
+		som_diffus:long_name = "Vertical soil organic matter diffusion coefficient for flat adv/diff profile " ;
+		som_diffus:units = "m^2/sec" ;
+	double surface_tension_water(allpfts) ;
+		surface_tension_water:long_name = "Surface tension of water (Arah and Vinten 1995)" ;
+		surface_tension_water:units = "J/m^2" ;
+	double tau_cwd(allpfts) ;
+		tau_cwd:long_name = "Corrected fragmentation rate constant CWD" ;
+		tau_cwd:units = "1/year" ;
+	double tau_l1(allpfts) ;
+		tau_l1:long_name = "Turnover time of  litter 1" ;
+		tau_l1:units = "year" ;
+	double tau_l2_l3(allpfts) ;
+		tau_l2_l3:long_name = "Turnover time of  litter 2 and litter 3" ;
+		tau_l2_l3:units = "year" ;
+	double tau_s1(allpfts) ;
+		tau_s1:long_name = "Turnover time of soil organic matter (SOM) 1" ;
+		tau_s1:units = "year" ;
+	double tau_s2(allpfts) ;
+		tau_s2:long_name = "Turnover time of soil organic matter (SOM) 2" ;
+		tau_s2:units = "year" ;
+	double tau_s3(allpfts) ;
+		tau_s3:long_name = "Turnover time of soil organic matter (SOM) 3" ;
+		tau_s3:units = "year" ;
+	double unsat_aere_ratio(allpfts) ;
+		unsat_aere_ratio:long_name = "Ratio to multiply upland vegetation aerenchyma porosity by compared to inundated systems" ;
+		unsat_aere_ratio:units = "unitless" ;
+	double vgc_max(allpfts) ;
+		vgc_max:long_name = "Ratio of saturation pressure triggering ebullition" ;
+		vgc_max:units = "unitless" ;
+	double vmax_ch4_oxid(allpfts) ;
+		vmax_ch4_oxid:long_name = "Oxidation rate constant" ;
+		vmax_ch4_oxid:units = "mol/m3-w/s" ;
+	double vmax_oxid_unsat(allpfts) ;
+		vmax_oxid_unsat:long_name = "Oxidation rate constant" ;
+		vmax_oxid_unsat:units = "mol/m3-w/s" ;
+	double wcf(allpfts) ;
+		wcf:long_name = "Wood combustion fraction" ;
+		wcf:units = "unitless" ;
+	double leafcp(pft) ;
+		leafcp:long_name = "leaf C:P " ;
+		leafcp:units = "gC/gP" ;
+		leafcp:coordinates = "pftname" ;
+	double lflitcp(pft) ;
+		lflitcp:long_name = "leaf litter  C:P " ;
+		lflitcp:units = "gC/gP" ;
+		lflitcp:coordinates = "pftname" ;
+	double frootcp(pft) ;
+		frootcp:long_name = "fine root C:P " ;
+		frootcp:units = "gC/gP" ;
+		frootcp:coordinates = "pftname" ;
+	double livewdcp(pft) ;
+		livewdcp:long_name = "live wood C:P " ;
+		livewdcp:units = "gC/gP" ;
+		livewdcp:coordinates = "pftname" ;
+	double deadwdcp(pft) ;
+		deadwdcp:long_name = "dead wood C:P " ;
+		deadwdcp:units = "gC/gP" ;
+	double graincp(pft) ;
+		graincp:long_name = "grain C:P " ;
+		graincp:units = "gC/gP" ;
+	double np_s1_new(allpfts) ;
+		np_s1_new:long_name = "NP ratio for soil 1" ;
+		np_s1_new:units = "none" ;
+		np_s1_new:coordinates = "pftname" ;
+	double np_s2_new(allpfts) ;
+		np_s2_new:long_name = "NP ratio for soil 2" ;
+		np_s2_new:units = "none" ;
+		np_s2_new:coordinates = "pftname" ;
+	double np_s3_new(allpfts) ;
+		np_s3_new:long_name = "NP ratio for soil 3" ;
+		np_s3_new:units = "none" ;
+		np_s3_new:coordinates = "pftname" ;
+	double np_s4_new(allpfts) ;
+		np_s4_new:long_name = "NP ratio for soil 4" ;
+		np_s4_new:units = "none" ;
+		np_s4_new:coordinates = "pftname" ;
+	double convfact(pft) ;
+		convfact:long_name = "conversion factor from gC/m2 to bu/acre" ;
+	double fyield(pft) ;
+		fyield:long_name = "fraction of grain that is actually harvested" ;
+		fyield:units = "unitless" ;
+	double presharv(pft) ;
+		presharv:long_name = "porportion of residue harvested with grain" ;
+		presharv:units = "unitless" ;
+	double root_dmx(pft) ;
+		root_dmx:long_name = "maximum rooting depth of crops" ;
+		root_dmx:units = "m" ;
+	double VMAX_PLANT_NH4(pft) ;
+		VMAX_PLANT_NH4:long_name = "plant NH4 maximum uptake affinity" ;
+		VMAX_PLANT_NH4:unit = "gN/gfrootC/s" ;
+	double VMAX_PLANT_NO3(pft) ;
+		VMAX_PLANT_NO3:long_name = "plant NO3 maximum uptake affinity" ;
+		VMAX_PLANT_NO3:unit = "gN/gfrootC/s" ;
+	double VMAX_PLANT_P(pft) ;
+		VMAX_PLANT_P:long_name = "plant POx maximum uptake affinity" ;
+		VMAX_PLANT_P:unit = "gP/gfrootC/s" ;
+	double KM_PLANT_NH4(pft) ;
+		KM_PLANT_NH4:long_name = "plant NH4 maximum uptake affinity" ;
+		KM_PLANT_NH4:unit = "gN/m3" ;
+	double KM_PLANT_NO3(pft) ;
+		KM_PLANT_NO3:long_name = "plant NO3 maximum uptake affinity" ;
+		KM_PLANT_NO3:unit = "gN/m3" ;
+	double KM_PLANT_P(pft) ;
+		KM_PLANT_P:long_name = "plant POx maximum uptake affinity" ;
+		KM_PLANT_P:unit = "gP/m3" ;
+	double decompmicc_patch_vr(pft, levgrnd) ;
+		decompmicc_patch_vr:long_name = "pft specific soil microbial decomposer density" ;
+		decompmicc_patch_vr:unit = "gC/m3" ;
+	double VMAX_MINSURF_P_vr(soilorder, levgrnd) ;
+		VMAX_MINSURF_P_vr:long_name = "maximum P adsorption capacit of soil mineral surface" ;
+		VMAX_MINSURF_P_vr:unit = "gP/m3" ;
+	double KM_MINSURF_P_vr(soilorder, levgrnd) ;
+		KM_MINSURF_P_vr:long_name = "affinity of P adsorption of soil mineral surface" ;
+		KM_MINSURF_P_vr:unit = "gP/m3" ;
+	double KM_DECOMP_NH4(allpfts) ;
+		KM_DECOMP_NH4:long_name = "affinity of NH4 microbial immobilization" ;
+		KM_DECOMP_NH4:unit = "gN/m3" ;
+	double KM_DECOMP_NO3(allpfts) ;
+		KM_DECOMP_NO3:long_name = "affinity of NO3 microbial immobilization" ;
+		KM_DECOMP_NO3:unit = "gN/m3" ;
+	double KM_DECOMP_P(allpfts) ;
+		KM_DECOMP_P:long_name = "affinity of POx microbial immobilization" ;
+		KM_DECOMP_P:unit = "gP/m3" ;
+	double KM_NIT(allpfts) ;
+		KM_NIT:long_name = "affinity of NH4 nitrification" ;
+		KM_NIT:unit = "gN/m3" ;
+	double KM_DEN(allpfts) ;
+		KM_DEN:long_name = "affinity of NO3 denitrification" ;
+		KM_DEN:unit = "gN/m3" ;
+	double VMAX_NFIX(allpfts) ;
+		VMAX_NFIX:long_name = "maximum N2 fixation rate" ;
+		VMAX_NFIX:unit = "gN/gC/s" ;
+	double KM_NFIX(allpfts) ;
+		KM_NFIX:long_name = "affinity parameter for N2 fixation" ;
+		KM_NFIX:unit = "gC/gN" ;
+	double VMAX_PTASE_vr(allpfts, levgrnd) ;
+		VMAX_PTASE_vr:long_name = "maximum phosphatase activity" ;
+		VMAX_PTASE_vr:unit = "gP/m3/s" ;
+	double KM_PTASE(allpfts) ;
+		KM_PTASE:long_name = "affinity parameter for phosphatase activity" ;
+		KM_PTASE:unit = "gN/gP" ;
+	double lamda_ptase(allpfts) ;
+		lamda_ptase:long_name = "critical value for phosphatase activity" ;
+		lamda_ptase:unit = "gN/gP" ;
+	double leafcn_obs(pft) ;
+		leafcn_obs:long_name = "leaf CN ratio" ;
+		leafcn_obs:unit = "gC/gN" ;
+	double frootcn_obs(pft) ;
+		frootcn_obs:long_name = "fine root CN ratio" ;
+		frootcn_obs:unit = "gC/gN" ;
+	double livewdcn_obs(pft) ;
+		livewdcn_obs:long_name = "live wood CN ratio" ;
+		livewdcn_obs:unit = "gC/gN" ;
+	double deadwdcn_obs(pft) ;
+		deadwdcn_obs:long_name = "dead wood CN ratio" ;
+		deadwdcn_obs:unit = "gC/gN" ;
+	double leafcp_obs(pft) ;
+		leafcp_obs:long_name = "leaf CP ratio" ;
+		leafcp_obs:unit = "gC/gP" ;
+	double frootcp_obs(pft) ;
+		frootcp_obs:long_name = "fine root CP ratio" ;
+		frootcp_obs:unit = "gC/gP" ;
+	double livewdcp_obs(pft) ;
+		livewdcp_obs:long_name = "live wood CP ratio" ;
+		livewdcp_obs:unit = "gC/gP" ;
+	double deadwdcp_obs(pft) ;
+		deadwdcp_obs:long_name = "dead wood CP ratio" ;
+		deadwdcp_obs:unit = "gC/gP" ;
+	double s_vc(pft) ;
+		s_vc:long_name = "slope of vcmax~leafcn relationship" ;
+		s_vc:unit = "umol CO2/m2/s per leaf N content" ;
+	double i_vc(pft) ;
+		i_vc:long_name = "intercept of vcmax~leafcn relationship" ;
+		i_vc:unit = "umol CO2/m2/s" ;
+	double fnr(pft) ;
+		fnr:long_name = "" ;
+		fnr:units = "" ;
+		fnr:coordinates = "pftname" ;
+	double act25(pft) ;
+		act25:long_name = "" ;
+		act25:units = "" ;
+		act25:coordinates = "pftname" ;
+	double kcha(pft) ;
+		kcha:long_name = "" ;
+		kcha:units = "" ;
+		kcha:coordinates = "pftname" ;
+	double koha(pft) ;
+		koha:long_name = "" ;
+		koha:units = "" ;
+		koha:coordinates = "pftname" ;
+	double cpha(pft) ;
+		cpha:long_name = "" ;
+		cpha:units = "" ;
+		cpha:coordinates = "pftname" ;
+	double vcmaxha(pft) ;
+		vcmaxha:long_name = "" ;
+		vcmaxha:units = "" ;
+		vcmaxha:coordinates = "pftname" ;
+	double jmaxha(pft) ;
+		jmaxha:long_name = "" ;
+		jmaxha:units = "" ;
+		jmaxha:coordinates = "pftname" ;
+	double tpuha(pft) ;
+		tpuha:long_name = "" ;
+		tpuha:units = "" ;
+		tpuha:coordinates = "pftname" ;
+	double lmrha(pft) ;
+		lmrha:long_name = "" ;
+		lmrha:units = "" ;
+		lmrha:coordinates = "pftname" ;
+	double vcmaxhd(pft) ;
+		vcmaxhd:long_name = "" ;
+		vcmaxhd:units = "" ;
+		vcmaxhd:coordinates = "pftname" ;
+	double jmaxhd(pft) ;
+		jmaxhd:long_name = "" ;
+		jmaxhd:units = "" ;
+		jmaxhd:coordinates = "pftname" ;
+	double tpuhd(pft) ;
+		tpuhd:long_name = "" ;
+		tpuhd:units = "" ;
+		tpuhd:coordinates = "pftname" ;
+	double lmrhd(pft) ;
+		lmrhd:long_name = "" ;
+		lmrhd:units = "" ;
+		lmrhd:coordinates = "pftname" ;
+	double lmrse(pft) ;
+		lmrse:long_name = "" ;
+		lmrse:units = "" ;
+		lmrse:coordinates = "pftname" ;
+	double qe(pft) ;
+		qe:long_name = "" ;
+		qe:units = "" ;
+		qe:coordinates = "pftname" ;
+	double theta_cj(pft) ;
+		theta_cj:long_name = "" ;
+		theta_cj:units = "" ;
+		theta_cj:coordinates = "pftname" ;
+	double bbbopt(pft) ;
+		bbbopt:long_name = "" ;
+		bbbopt:units = "" ;
+		bbbopt:coordinates = "pftname" ;
+	double mbbopt(pft) ;
+		mbbopt:long_name = "" ;
+		mbbopt:units = "" ;
+		mbbopt:coordinates = "pftname" ;
+	double nstor(pft) ;
+		nstor:long_name = "" ;
+		nstor:units = "" ;
+		nstor:coordinates = "pftname" ;
+	double tc_stress(allpfts) ;
+		tc_stress:long_name = "" ;
+		tc_stress:units = "" ;
+		tc_stress:coordinates = "pftname" ;
+
+// global attributes:
+		:Conventions = "CF-1.0" ;
+		:title = "Vegetation (Plant Function Type or PFT) constants" ;
+		:NCO = "4.2.3" ;
+		:nco_openmp_thread_number = 1 ;
+		:Created_by = "bbye" ;
+		:Created_on = "Thu Mar  1 13:37:50 CST 2018" ;
+		:Commit_used = "496be8b63485c04910240a3fb548d5aa715c01b0" ;
+data:
+
+ aereoxid = 0 ;
+
+ mino2lim = 0.2 ;
+
+ q10ch4base = 295 ;
+
+ aleaff = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0 ;
+
+ allconsl = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 5, 5, 3, 3, 3, 
+    3, 2, 2 ;
+
+ allconss = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 2, 2, 1, 1, 1, 
+    1, 5, 5 ;
+
+ arootf = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.05, 0.05, _, 
+    _, _, _, 0.05, 0.05 ;
+
+ arooti = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.4, 0.4, 0.3, 
+    0.3, 0.3, 0.3, 0.5, 0.5 ;
+
+ astemf = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.05, 
+    0.05, 0.05, 0.05, 0.05, 0.05 ;
+
+ baset = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 
+    10, 10 ;
+
+ bfact = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.1, 0.1, 0.1, 
+    0.1, 0.1, 0.1, 0.1, 0.1 ;
+
+ c3psn = 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 1, 
+    1, 1 ;
+
+ cc_dstem = 0, 0.22, 0.25, 0.25, 0.22, 0.22, 0.22, 0.22, 0.22, 0.3, 0.3, 0.3, 
+    0.8, 0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ cc_leaf = 0, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 
+    0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ cc_lstem = 0, 0.22, 0.25, 0.25, 0.22, 0.22, 0.22, 0.22, 0.22, 0.3, 0.3, 0.3, 
+    0.8, 0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ cc_other = 0, 0.45, 0.5, 0.5, 0.45, 0.45, 0.45, 0.45, 0.45, 0.55, 0.55, 
+    0.55, 0.8, 0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ croot_stem = 0, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ crop = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 
+    1, 1 ;
+
+ deadwdcn = 1, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 0, 0, 
+    0, 0, 0, 500, 500, 500, 500, 500, 500, 500, 500 ;
+
+ declfact = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 1.05, 1.05, 
+    1.05, 1.05, 1.05, 1.05, 1.05, 1.05 ;
+
+ displar = 0, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.68, 0.68, 
+    0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 0.68, 
+    0.68, 0.68 ;
+
+ dleaf = 0, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 
+    0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 
+    0.04 ;
+
+ dsladlai = 0, 0.00125, 0.001, 0.003, 0.0015, 0.0015, 0.004, 0.004, 0.004, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ evergreen = 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0 ;
+
+ fcur = 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 
+    1, 1 ;
+
+ fcurdv = 0, 1, 1, 0.5, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 
+    0.5, 1, 1, 1, 1, 1, 1, 1, 1 ;
+
+ fd_pft = 0, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 
+    0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fertnitro = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0.0149999996647239, 0.0149999996647239, 0.00800000037997961, 
+    0.00800000037997961, 0.00800000037997961, 0.00800000037997961, 
+    0.00249999994412065, 0.00249999994412065 ;
+
+ ffrootcn = 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 
+    999, 999, 999, 999, 0, 0, 40, 40, 40, 40, 0, 0 ;
+
+ fleafcn = 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 
+    999, 999, 999, 999, 65, 65, 65, 65, 65, 65, 65, 65 ;
+
+ fleafi = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.8, 0.8, 0.75, 
+    0.75, 0.425, 0.425, 0.85, 0.85 ;
+
+ flivewd = 0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.5, 0.5, 0.1, 0, 0, 0, 
+    0, 0, 1, 1, 1, 1, 1, 1, 1, 1 ;
+
+ flnr = 0, 0.0509, 0.0466, 0.0546, 0.0461, 0.0515, 0.0716, 0.1007, 0.1007, 
+    0.0517, 0.0943, 0.0943, 0.1365, 0.1365, 0.09, 0.1758, 0.1758, 0.293, 
+    0.293, 0.4102, 0.4102, 0.4102, 0.4102, 0.4102, 0.4102 ;
+
+ fm_droot = 0, 0.13, 0.15, 0.15, 0.13, 0.13, 0.1, 0.1, 0.13, 0.17, 0.17, 
+    0.17, 0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fm_dstem = 0, 0.45, 0.5, 0.5, 0.45, 0.45, 0.35, 0.35, 0.45, 0.55, 0.55, 
+    0.55, 0.8, 0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fm_leaf = 0, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 
+    0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fm_lroot = 0, 0.13, 0.15, 0.15, 0.13, 0.13, 0.1, 0.1, 0.13, 0.17, 0.17, 
+    0.17, 0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fm_lstem = 0, 0.45, 0.5, 0.5, 0.45, 0.45, 0.35, 0.35, 0.45, 0.55, 0.55, 
+    0.55, 0.8, 0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fm_other = 0, 0.45, 0.5, 0.5, 0.45, 0.45, 0.35, 0.35, 0.45, 0.55, 0.55, 
+    0.55, 0.8, 0.8, 0.8, 0.8, 0.8, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fm_root = 0, 0.13, 0.15, 0.15, 0.13, 0.13, 0.1, 0.1, 0.13, 0.17, 0.17, 0.17, 
+    0.2, 0.2, 0.2, 0.2, 0.2, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fnitr = 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+    1, 1 ;
+
+ fr_fcel = 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 
+    0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ;
+
+ fr_flab = 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25 ;
+
+ fr_flig = 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25 ;
+
+ froot_leaf = 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 
+    2, 2, 2, 2 ;
+
+ frootcn = 1, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42, 
+    42, 42, 42, 42, 42, 42, 42, 42 ;
+
+ fsr_pft = 0, 0.4, 0.43, 0.43, 0.4, 0.4, 0.4, 0.4, 0.4, 0.46, 0.46, 0.46, 
+    0.55, 0.55, 0.55, 0.55, 0.55, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ fstemcn = 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 
+    999, 999, 999, 999, 120, 120, 100, 100, 100, 100, 130, 130 ;
+
+ gddmin = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 50, 50, 50, 50, 
+    50, 50, 50, 50 ;
+
+ graincn = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 50, 50, 50, 50, 
+    50, 50, 50, 50 ;
+
+ grnfill = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.65, 0.65, 
+    0.6, 0.6, 0.4, 0.4, 0.7, 0.7 ;
+
+ grperc = 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 
+    0.3, 0.3, 0.3, 0.3, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25 ;
+
+ grpnow = 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+    1, 1, 1 ;
+
+ hybgdd = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 1700, 1700, 
+    1700, 1700, 1700, 1700, 1900, 1900 ;
+
+ irrigated = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 
+    0, 1, 0, 1 ;
+
+ laimx = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 5, 5, 7, 7, 7, 7, 
+    6, 6 ;
+
+ leaf_long = 0, 3, 6, 1, 1.5, 1.5, 1, 1, 1, 1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+    1, 1, 1, 1, 1, 1 ;
+
+ leafcn = 1, 35, 40, 25, 30, 30, 25, 25, 25, 30, 25, 25, 25, 25, 25, 25, 25, 
+    25, 25, 25, 25, 25, 25, 25, 25 ;
+
+ lf_fcel = 0, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 
+    0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ;
+
+ lf_flab = 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25 ;
+
+ lf_flig = 0, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25 ;
+
+ lfemerg = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 0.03, 0.03, 
+    0.05, 0.05, 0.05, 0.05, 0.03, 0.03 ;
+
+ lflitcn = 1, 70, 80, 50, 60, 60, 50, 50, 50, 60, 50, 50, 50, 50, 50, 50, 50, 
+    25, 25, 25, 25, 25, 25, 25, 25 ;
+
+ livewdcn = 1, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 0, 0, 0, 0, 0, 50, 
+    50, 50, 50, 50, 50, 50, 50 ;
+
+ max_NH_planting_date = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    615, 615, 615, 615, 1130, 1130, 615, 615 ;
+
+ max_SH_planting_date = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    1215, 1215, 1215, 1215, 530, 530, 1215, 1215 ;
+
+ min_NH_planting_date = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    401, 401, 401, 401, 901, 901, 501, 501 ;
+
+ min_SH_planting_date = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    1001, 1001, 1001, 1001, 301, 301, 1101, 1101 ;
+
+ min_planting_temp = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 
+    279.15, 279.15, 272.15, 272.15, 278.15, 278.15, 279.15, 279.15 ;
+
+ mxmat = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 165, 165, 150, 
+    150, 265, 265, 150, 150 ;
+
+ mxtmp = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 30, 30, 26, 26, 
+    26, 26, 30, 30 ;
+
+ pconv = 0, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.8, 0.8, 0.8, 1, 1, 1, 
+    1, 1, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ pftname =
+  "not_vegetated                           ",
+  "needleleaf_evergreen_temperate_tree     ",
+  "needleleaf_evergreen_boreal_tree        ",
+  "needleleaf_deciduous_boreal_tree        ",
+  "broadleaf_evergreen_tropical_tree       ",
+  "broadleaf_evergreen_temperate_tree      ",
+  "broadleaf_deciduous_tropical_tree       ",
+  "broadleaf_deciduous_temperate_tree      ",
+  "broadleaf_deciduous_boreal_tree         ",
+  "broadleaf_evergreen_shrub               ",
+  "broadleaf_deciduous_temperate_shrub     ",
+  "broadleaf_deciduous_boreal_shrub        ",
+  "c3_arctic_grass                         ",
+  "c3_non-arctic_grass                     ",
+  "c4_grass                                ",
+  "c3_crop                                 ",
+  "c3_irrigated                            ",
+  "corn                                    ",
+  "irrigated_corn                          ",
+  "spring_temperate_cereal                 ",
+  "irrigated_spring_temperate_cereal       ",
+  "winter_temperate_cereal                 ",
+  "irrigated_winter_temperate_cereal       ",
+  "soybean                                 ",
+  "irrigated_soybean                       " ;
+
+ pftnum = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 
+    19, 20, 21, 22, 23, 24 ;
+
+ pftpar20 = _, 15, 15, 15, 15, 15, 15, 15, 15, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0 ;
+
+ pftpar28 = _, -2, -32.5, _, 15.5, 3, 15.5, -17, -1000, _, -17, -1000, -1000, 
+    -17, 15.5, _, _, _, _, _, _, _, _, _, _ ;
+
+ pftpar29 = _, 22, -2, -2, _, 18.8, _, 15.5, -2, _, _, -2, -17, 15.5, _, _, 
+    _, _, _, _, _, _, _, _, _ ;
+
+ pftpar30 = 0, 900, 600, 350, 0, 1200, 0, 1200, 350, 0, 1200, 350, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ pftpar31 = _, _, 23, 23, _, _, _, _, 23, _, _, 23, _, _, _, _, _, _, _, _, 
+    _, _, _, _, _ ;
+
+ planting_temp = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 283.15, 
+    283.15, 280.15, 280.15, _, _, 286.15, 286.15 ;
+
+ pprod10 = 0, 0.3, 0.3, 0.3, 0.4, 0.3, 0.4, 0.3, 0.3, 0.2, 0.2, 0.2, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ pprod100 = 0, 0.1, 0.1, 0.1, 0, 0.1, 0, 0.1, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0 ;
+
+ pprodharv10 = _, 0.75, 0.75, 0.75, 1, 0.75, 1, 0.75, 0.75, _, _, _, _, _, _, 
+    _, _, _, _, _, _, _, _, _, _ ;
+
+ rholnir = 0, 0.35, 0.35, 0.35, 0.45, 0.45, 0.45, 0.45, 0.45, 0.35, 0.45, 
+    0.45, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 
+    0.35, 0.35 ;
+
+ rholvis = 0, 0.07, 0.07, 0.07, 0.1, 0.1, 0.1, 0.1, 0.1, 0.07, 0.1, 0.1, 
+    0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 
+    0.11 ;
+
+ rhosnir = 0, 0.39, 0.39, 0.39, 0.39, 0.39, 0.39, 0.39, 0.39, 0.39, 0.39, 
+    0.39, 0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 0.53, 
+    0.53, 0.53 ;
+
+ rhosvis = 0, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 
+    0.16, 0.31, 0.31, 0.31, 0.31, 0.31, 0.31, 0.31, 0.31, 0.31, 0.31, 0.31, 
+    0.31, 0.31 ;
+
+ roota_par = 0, 7, 7, 7, 7, 7, 6, 6, 6, 7, 7, 7, 11, 11, 11, 6, 6, 6, 6, 6, 
+    6, 6, 6, 6, 6 ;
+
+ rootb_par = 0, 2, 2, 2, 1, 1, 2, 2, 2, 1.5, 1.5, 1.5, 2, 2, 2, 3, 3, 3, 3, 
+    3, 3, 3, 3, 3, 3 ;
+
+ rootprof_beta = 0, 0.976, 0.943, 0.943, 0.962, 0.966, 0.961, 0.966, 0.943, 
+    0.964, 0.964, 0.914, 0.914, 0.943, 0.943, 0.961, 0.961, 0.961, 0.961, 
+    0.961, 0.961, 0.961, 0.961, 0.961, 0.961 ;
+
+ season_decid = 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0 ;
+
+ slatop = 0, 0.01, 0.008, 0.024, 0.012, 0.012, 0.03, 0.03, 0.03, 0.012, 0.03, 
+    0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.05, 0.05, 0.07, 0.07, 0.07, 0.07, 
+    0.07, 0.07 ;
+
+ smpsc = 0, -255000, -255000, -255000, -255000, -255000, -224000, -224000, 
+    -224000, -428000, -428000, -428000, -275000, -275000, -275000, -275000, 
+    -275000, -275000, -275000, -275000, -275000, -275000, -275000, -275000, 
+    -275000 ;
+
+ smpso = 0, -66000, -66000, -66000, -66000, -66000, -35000, -35000, -35000, 
+    -83000, -83000, -83000, -74000, -74000, -74000, -74000, -74000, -74000, 
+    -74000, -74000, -74000, -74000, -74000, -74000, -74000 ;
+
+ stem_leaf = 0, -1, -1, -1, -1, -1, -1, -1, -1, 0.2, 0.2, 0.2, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0 ;
+
+ stress_decid = 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 
+    0, 0, 0, 0, 0 ;
+
+ taulnir = 0, 0.1, 0.1, 0.1, 0.25, 0.25, 0.25, 0.25, 0.25, 0.1, 0.25, 0.25, 
+    0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 
+    0.34 ;
+
+ taulvis = 0, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 
+    0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 
+    0.05, 0.05 ;
+
+ tausnir = 0, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 
+    0.001, 0.001, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 
+    0.25, 0.25, 0.25 ;
+
+ tausvis = 0, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 
+    0.001, 0.001, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 
+    0.12, 0.12, 0.12 ;
+
+ woody = 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0 ;
+
+ xl = 0, 0.01, 0.01, 0.01, 0.1, 0.1, 0.01, 0.25, 0.25, 0.01, 0.25, 0.25, 
+    -0.3, -0.3, -0.3, -0.3, -0.3, -0.5, -0.5, 0.65, 0.65, 0.65, 0.65, -0.5, 
+    -0.5 ;
+
+ z0mr = 0, 0.055, 0.055, 0.055, 0.075, 0.075, 0.055, 0.055, 0.055, 0.12, 
+    0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 
+    0.12, 0.12, 0.12 ;
+
+ ztopmx = _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, 2.5, 2.5, 1.2, 
+    1.2, 1.2, 1.2, 0.75, 0.75 ;
+
+ atmch4 = 1.7e-06 ;
+
+ bdnr = 0.5 ;
+
+ br_mr = 2.525e-06 ;
+
+ capthick = 100 ;
+
+ cn_s1 = 12 ;
+
+ cn_s1_bgc = 8 ;
+
+ cn_s2 = 12 ;
+
+ cn_s2_bgc = 11 ;
+
+ cn_s3 = 10 ;
+
+ cn_s3_bgc = 11 ;
+
+ cn_s4 = 10 ;
+
+ cnscalefactor = 1 ;
+
+ compet_decomp_nh4 = 1 ;
+
+ compet_decomp_no3 = 1 ;
+
+ compet_denit = 1 ;
+
+ compet_nit = 1 ;
+
+ compet_plant_nh4 = 1 ;
+
+ compet_plant_no3 = 1 ;
+
+ crit_dayl = 39300 ;
+
+ crit_offset_fdd = 15 ;
+
+ crit_offset_swi = 15 ;
+
+ crit_onset_fdd = 15 ;
+
+ crit_onset_swi = 15 ;
+
+ cryoturb_diffusion_k = 1.5855e-11 ;
+
+ cwd_fcel = 0.76 ;
+
+ cwd_flig = 0.24 ;
+
+ dayscrecover = 30 ;
+
+ decomp_depth_efolding = 0.5 ;
+
+ depth_runoff_Nloss = 0.05 ;
+
+ dnp = 0.01 ;
+
+ ef_time = 1 ;
+
+ f_ch4 = 0.2 ;
+
+ f_sat = 0.95 ;
+
+ froz_q10 = 1.5 ;
+
+ fstor2tran = 0.5 ;
+
+ gddfunc_p1 = 4.8 ;
+
+ gddfunc_p2 = 0.13 ;
+
+ highlatfact = 2 ;
+
+ k_frag = 0.00100050033358353 ;
+
+ k_l1 = 1.20397280432594 ;
+
+ k_l2 = 0.0725706928348355 ;
+
+ k_l3 = 0.0140989243795016 ;
+
+ k_m = 0.005 ;
+
+ k_m_o2 = 0.02 ;
+
+ k_m_unsat = 0.0005 ;
+
+ k_mort = 0.3 ;
+
+ k_nitr_max = 1.1574074e-06 ;
+
+ k_s1 = 0.0725706928348355 ;
+
+ k_s2 = 0.0140989243795016 ;
+
+ k_s3 = 0.0014009809156281 ;
+
+ k_s4 = 0.000100005000333347 ;
+
+ lake_decomp_fact = 9e-11 ;
+
+ lwtop_ann = 0.7 ;
+
+ max_altdepth_cryoturbation = 2 ;
+
+ max_altmultiplier_cryoturb = 3 ;
+
+ me_herb = 0.2 ;
+
+ me_woody = 0.3 ;
+
+ minfuel = 100 ;
+
+ minpsi_hr = -10 ;
+
+ ndays_off = 15 ;
+
+ ndays_on = 30 ;
+
+ nongrassporosratio = 0.33 ;
+
+ organic_max = 130 ;
+
+ oxinhib = 400 ;
+
+ pHmax = 9 ;
+
+ pHmin = 2.2 ;
+
+ porosmin = 0.05 ;
+
+ q10_ch4oxid = 1.9 ;
+
+ q10_hr = 1.5 ;
+
+ q10_mr = 1.5 ;
+
+ q10ch4 = 1.33 ;
+
+ q10lakebase = 298 ;
+
+ qflxlagd = 30 ;
+
+ r_mort = 0.02 ;
+
+ rc_npool = 10 ;
+
+ redoxlag = 30 ;
+
+ redoxlag_vertical = 0 ;
+
+ rf_cwdl2_bgc = 0 ;
+
+ rf_cwdl3_bgc = 0 ;
+
+ rf_l1s1 = 0.39 ;
+
+ rf_l1s1_bgc = 0.55 ;
+
+ rf_l2s1_bgc = 0.5 ;
+
+ rf_l2s2 = 0.55 ;
+
+ rf_l3s2_bgc = 0.5 ;
+
+ rf_l3s3 = 0.29 ;
+
+ rf_s1s2 = 0.28 ;
+
+ rf_s2s1_bgc = 0.55 ;
+
+ rf_s2s3 = 0.46 ;
+
+ rf_s2s3_bgc = 0.55 ;
+
+ rf_s3s1_bgc = 0.55 ;
+
+ rf_s3s4 = 0.55 ;
+
+ rij_kro_a = 1.5e-10 ;
+
+ rij_kro_alpha = 1.26 ;
+
+ rij_kro_beta = 0.6 ;
+
+ rij_kro_delta = 0.85 ;
+
+ rij_kro_gamma = 0.6 ;
+
+ rob = 3 ;
+
+ rootlitfrac = 0.5 ;
+
+ satpow = 2 ;
+
+ scale_factor_aere = 1 ;
+
+ scale_factor_gasdiff = 1 ;
+
+ scale_factor_liqdiff = 1 ;
+
+ sf_minn = 0.1 ;
+
+ sf_no3 = 1 ;
+
+ smp_crit = -240000 ;
+
+ soilpsi_off = -2 ;
+
+ soilpsi_on = -2 ;
+
+ som_diffus = 3.171e-12 ;
+
+ surface_tension_water = 0.073 ;
+
+ tau_cwd = 3.3333333333333 ;
+
+ tau_l1 = 0.054054054054 ;
+
+ tau_l2_l3 = 0.204081632653061 ;
+
+ tau_s1 = 0.136986301369863 ;
+
+ tau_s2 = 5 ;
+
+ tau_s3 = 222.222222222222 ;
+
+ unsat_aere_ratio = 0.166666666666667 ;
+
+ vgc_max = 0.15 ;
+
+ vmax_ch4_oxid = 1.25e-05 ;
+
+ vmax_oxid_unsat = 1.25e-06 ;
+
+ wcf = 0.4 ;
+
+ leafcp = 1, 525, 400, 250, 600, 450, 500, 375, 250, 450, 375, 250, 250, 375, 
+    375, 275, 275, 275, 275, 275, 275, 275, 275, 275, 275 ;
+
+ lflitcp = 1, 1050, 800, 500, 1200, 900, 1000, 750, 500, 900, 750, 500, 500, 
+    750, 750, 550, 550, 550, 550, 550, 550, 550, 550, 550, 550 ;
+
+ frootcp = 1, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 
+    1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 
+    1000, 1000 ;
+
+ livewdcp = 1, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 
+    3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 
+    3000, 3000 ;
+
+ deadwdcp = 1, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 
+    3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 3000, 
+    3000, 3000 ;
+
+ graincp = 1, 730, 730, 880, 550, 660, 1000, 550, 1000, 660, 550, 550, 550, 
+    550, 550, 550, 550, 550, 550, 550, 550, 550, 550, 550, 550 ;
+
+ np_s1_new = 30 ;
+
+ np_s2_new = 30 ;
+
+ np_s3_new = 50 ;
+
+ np_s4_new = 50 ;
+
+ convfact = 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 
+    999, 999, 150, 150, 159, 159, 149, 149, 149, 149, 149, 149 ;
+
+ fyield = 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 
+    999, 999, 0.85, 0.85, 1, 1, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85 ;
+
+ presharv = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.3, 0.3, 0.3, 
+    0.3, 0.3, 0.3, 0.3, 0.3 ;
+
+ root_dmx = 999, 1.89, 1.17, 1.17, 3, 1.89, 3, 1.33, 1.17, 1.25, 1.25, 0.73, 
+    0.5, 1.17, 1.62, 1.15, 1.15, 1.2, 1.2, 0.9, 0.9, 0.9, 0.9, 1.6, 1.6 ;
+
+ VMAX_PLANT_NH4 = 1.0275e-07, 2.46976923076923e-07, 1.37666666666667e-08, 
+    1.37667e-08, 1.8e-08, 2.46977e-07, 1.8e-08, 2.46977e-07, 1.37667e-08, 
+    1.55166666666667e-07, 1.55167e-07, 1.55167e-07, 1.0275e-07, 1.0275e-07, 
+    1.0275e-07, 1.0275e-07, 1.0275e-07, 1.0275e-07, 1.0275e-07, 1.0275e-07, 
+    1.0275e-07, 1.0275e-07, 1.0275e-07, 1.0275e-07, 1.0275e-07 ;
+
+ VMAX_PLANT_NO3 = 6.995e-08, 1.85438571428571e-07, 3.209e-09, 3.209e-09, 
+    1.6e-08, 1.85439e-07, 1.6e-08, 1.85439e-07, 3.209e-09, 9.33e-08, 
+    9.33e-08, 9.33e-08, 6.995e-08, 6.995e-08, 6.995e-08, 6.995e-08, 
+    6.995e-08, 6.995e-08, 6.995e-08, 6.995e-08, 6.995e-08, 6.995e-08, 
+    6.995e-08, 6.995e-08, 6.995e-08 ;
+
+ VMAX_PLANT_P = 1.3865e-07, 1.6428e-08, 8.9e-09, 8.9e-09, 1.72e-08, 
+    1.6428e-08, 1.72e-08, 1.6428e-08, 8.9e-09, 1.34765e-08, 1.34765e-08, 
+    1.34765e-08, 1.3865e-07, 1.3865e-07, 1.3865e-07, 1.3865e-07, 1.3865e-07, 
+    1.3865e-07, 1.3865e-07, 1.3865e-07, 1.3865e-07, 1.3865e-07, 1.3865e-07, 
+    1.3865e-07, 1.3865e-07 ;
+
+ KM_PLANT_NH4 = 1.48, 0.676, 2.946, 2.946, 0.14, 0.676, 0.14, 0.676, 2.946, 
+    2.25, 2.25, 2.25, 1.48, 1.48, 1.48, 1.48, 1.48, 1.48, 1.48, 1.48, 1.48, 
+    1.48, 1.48, 1.48, 1.48 ;
+
+ KM_PLANT_NO3 = 2.07, 0.952857142857143, 1.02466666666667, 1.024666667, 0.27, 
+    0.952857143, 0.27, 0.952857143, 1.024666667, 0.7, 0.7, 0.7, 2.07, 2.07, 
+    2.07, 2.07, 2.07, 2.07, 2.07, 2.07, 2.07, 2.07, 2.07, 2.07, 2.07 ;
+
+ KM_PLANT_P = 0.035, 0.6464, 0.34, 0.34, 0.102, 0.6464, 0.102, 0.6464, 0.34, 
+    0.357, 0.357, 0.357, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 
+    0.035, 0.035, 0.035, 0.035, 0.035, 0.035 ;
+
+ decompmicc_patch_vr =
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+  223.836050756943, 441.121843368723, 404.552273252927, 350.874780237435, 
+    277.723157994118, 189.344208322459, 101.34502576413, 36.7935505197724, 
+    8.16617001830126, 0, 0, 0, 0, 0, 0,
+  665.68384686848, 1311.88735969198, 1203.13020448536, 1043.49443571633, 
+    825.943004054955, 563.105811383477, 301.39803835669, 109.423268357017, 
+    24.286022977897, 0, 0, 0, 0, 0, 0,
+  665.68384686848, 1311.88735969198, 1203.13020448536, 1043.49443571633, 
+    825.943004054955, 563.105811383477, 301.39803835669, 109.423268357017, 
+    24.286022977897, 0, 0, 0, 0, 0, 0,
+  192.544684477656, 379.454810163095, 347.997516685936, 301.823918102202, 
+    238.89859407045, 162.874660832483, 87.1774048154709, 31.6499623348654, 
+    7.02457278104894, 0, 0, 0, 0, 0, 0,
+  180.781871606245, 356.273407169739, 326.737881918052, 283.385090365234, 
+    224.303958726882, 152.924429476762, 81.8516202982743, 29.7164237106121, 
+    6.59543221376066, 0, 0, 0, 0, 0, 0,
+  192.544684477656, 379.454810163095, 347.997516685936, 301.823918102202, 
+    238.89859407045, 162.874660832483, 87.1774048154709, 31.6499623348654, 
+    7.02457278104894, 0, 0, 0, 0, 0, 0,
+  180.781871606245, 356.273407169739, 326.737881918052, 283.385090365234, 
+    224.303958726882, 152.924429476762, 81.8516202982743, 29.7164237106121, 
+    6.59543221376066, 0, 0, 0, 0, 0, 0,
+  665.68384686848, 1311.88735969198, 1203.13020448536, 1043.49443571633, 
+    825.943004054955, 563.105811383477, 301.39803835669, 109.423268357017, 
+    24.286022977897, 0, 0, 0, 0, 0, 0,
+  181.46400667799, 317.007667815324, 279.387458686671, 227.017126924484, 
+    161.531376155891, 92.641793247553, 37.5561404457184, 8.78159105821851, 
+    0.908749336287671, 0, 0, 0, 0, 0, 0,
+  181.46400667799, 317.007667815324, 279.387458686671, 227.017126924484, 
+    161.531376155891, 92.641793247553, 37.5561404457184, 8.78159105821851, 
+    0.908749336287671, 0, 0, 0, 0, 0, 0,
+  181.46400667799, 317.007667815324, 279.387458686671, 227.017126924484, 
+    161.531376155891, 92.641793247553, 37.5561404457184, 8.78159105821851, 
+    0.908749336287671, 0, 0, 0, 0, 0, 0,
+  518.862164843443, 906.423746536732, 798.85584088041, 649.112736398449, 
+    461.86856036477, 264.891767129896, 107.384713318982, 25.1093064164649, 
+    2.59839764677396, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0,
+  331.153445385037, 578.506907966629, 509.853834020311, 414.283279195187, 
+    294.778412154931, 169.061895977063, 68.5361550846461, 16.0255148562429, 
+    1.65837556004724, 0, 0, 0, 0, 0, 0 ;
+
+ VMAX_MINSURF_P_vr =
+  165.592996733453, 326.340139226861, 299.286120518747, 259.575730277694, 
+    205.458458720138, 140.076072483452, 74.9746364071369, 27.2197184967704, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307, 6.04129924823307, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307,
+  91.3616533701808, 180.049731987234, 165.123376837929, 143.21419601528, 
+    113.356391018007, 77.2833503356976, 41.3653166384204, 15.0177757223561, 
+    3.3331306197148, 3.3331306197148, 3.3331306197148, 3.3331306197148, 
+    3.3331306197148, 3.3331306197148, 3.3331306197148,
+  87.935591368799, 173.297867037712, 158.931250206507, 137.843663664707, 
+    109.105526354832, 74.3852246981089, 39.8141172644796, 14.4546091327677, 
+    3.20813822147549, 3.20813822147549, 3.20813822147549, 3.20813822147549, 
+    3.20813822147549, 3.20813822147549, 3.20813822147549,
+  87.935591368799, 173.297867037712, 158.931250206507, 137.843663664707, 
+    109.105526354832, 74.3852246981089, 39.8141172644796, 14.4546091327677, 
+    3.20813822147549, 3.20813822147549, 3.20813822147549, 3.20813822147549, 
+    3.20813822147549, 3.20813822147549, 3.20813822147549,
+  57.101033356363, 112.531082492021, 103.202110523706, 89.5088725095497, 
+    70.8477443862545, 48.302093959811, 25.8533228990127, 9.38610982647255, 
+    2.08320663732175, 2.08320663732175, 2.08320663732175, 2.08320663732175, 
+    2.08320663732175, 2.08320663732175, 2.08320663732175,
+  87.935591368799, 173.297867037712, 158.931250206507, 137.843663664707, 
+    109.105526354832, 74.3852246981089, 39.8141172644796, 14.4546091327677, 
+    3.20813822147549, 3.20813822147549, 3.20813822147549, 3.20813822147549, 
+    3.20813822147549, 3.20813822147549, 3.20813822147549,
+  91.3616533701808, 180.049731987234, 165.123376837929, 143.21419601528, 
+    113.356391018007, 77.2833503356976, 41.3653166384204, 15.0177757223561, 
+    3.3331306197148, 3.3331306197148, 3.3331306197148, 3.3331306197148, 
+    3.3331306197148, 3.3331306197148, 3.3331306197148,
+  36.5446613480723, 72.0198927948935, 66.0493507351717, 57.2856784061118, 
+    45.3425564072029, 30.913340134279, 16.5461266553681, 6.00711028894243, 
+    1.33325224788592, 1.33325224788592, 1.33325224788592, 1.33325224788592, 
+    1.33325224788592, 1.33325224788592, 1.33325224788592,
+  84.5095293674173, 166.546002088191, 152.739123575085, 132.473131314134, 
+    104.854661691657, 71.4870990605203, 38.2629178905388, 13.8914425431794, 
+    3.08314582323619, 3.08314582323619, 3.08314582323619, 3.08314582323619, 
+    3.08314582323619, 3.08314582323619, 3.08314582323619,
+  153.030769395053, 301.583301078617, 276.581656203531, 239.883778325593, 
+    189.871954955162, 129.449611812293, 69.2869053693541, 25.1547743349464, 
+    5.58299378802229, 5.58299378802229, 5.58299378802229, 5.58299378802229, 
+    5.58299378802229, 5.58299378802229, 5.58299378802229,
+  153.030769395053, 301.583301078617, 276.581656203531, 239.883778325593, 
+    189.871954955162, 129.449611812293, 69.2869053693541, 25.1547743349464, 
+    5.58299378802229, 5.58299378802229, 5.58299378802229, 5.58299378802229, 
+    5.58299378802229, 5.58299378802229, 5.58299378802229,
+  151.888748727926, 299.332679428776, 274.517613993057, 238.093600875402, 
+    188.455000067437, 128.483569933097, 68.7698389113739, 24.967052138417, 
+    5.54132965527585, 5.54132965527585, 5.54132965527585, 5.54132965527585, 
+    5.54132965527585, 5.54132965527585, 5.54132965527585,
+  165.592996733453, 326.340139226861, 299.286120518747, 259.575730277694, 
+    205.458458720138, 140.076072483452, 74.9746364071369, 27.2197184967704, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307, 6.04129924823307, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307,
+  165.592996733453, 326.340139226861, 299.286120518747, 259.575730277694, 
+    205.458458720138, 140.076072483452, 74.9746364071369, 27.2197184967704, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307, 6.04129924823307, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307,
+  165.592996733453, 326.340139226861, 299.286120518747, 259.575730277694, 
+    205.458458720138, 140.076072483452, 74.9746364071369, 27.2197184967704, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307, 6.04129924823307, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307,
+  165.592996733453, 326.340139226861, 299.286120518747, 259.575730277694, 
+    205.458458720138, 140.076072483452, 74.9746364071369, 27.2197184967704, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307, 6.04129924823307, 
+    6.04129924823307, 6.04129924823307, 6.04129924823307 ;
+
+ KM_MINSURF_P_vr =
+  11.4202066712726, 22.5062164984042, 20.6404221047411, 17.9017745019099, 
+    14.1695488772509, 9.6604187919622, 5.17066457980255, 1.87722196529451, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435, 0.41664132746435, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435,
+  89.0776120359263, 175.548488687553, 160.995292416981, 139.633841114898, 
+    110.522481242557, 75.3512665773052, 40.3311837224598, 14.6423313292972, 
+    3.24980235422193, 3.24980235422193, 3.24980235422193, 3.24980235422193, 
+    3.24980235422193, 3.24980235422193, 3.24980235422193,
+  74.2313433632719, 146.290407239627, 134.162743680817, 116.361534262415, 
+    92.1020677021309, 62.7927221477543, 33.6093197687165, 12.2019427744143, 
+    2.70816862851827, 2.70816862851827, 2.70816862851827, 2.70816862851827, 
+    2.70816862851827, 2.70816862851827, 2.70816862851827,
+  74.2313433632719, 146.290407239627, 134.162743680817, 116.361534262415, 
+    92.1020677021309, 62.7927221477543, 33.6093197687165, 12.2019427744143, 
+    2.70816862851827, 2.70816862851827, 2.70816862851827, 2.70816862851827, 
+    2.70816862851827, 2.70816862851827, 2.70816862851827,
+  73.0893226961447, 144.039785589787, 132.098701470343, 114.571356812224, 
+    90.6851128144058, 61.8266802685581, 33.0922533107363, 12.0142205778849, 
+    2.66650449577184, 2.66650449577184, 2.66650449577184, 2.66650449577184, 
+    2.66650449577184, 2.66650449577184, 2.66650449577184,
+  74.2313433632719, 146.290407239627, 134.162743680817, 116.361534262415, 
+    92.1020677021309, 62.7927221477543, 33.6093197687165, 12.2019427744143, 
+    2.70816862851827, 2.70816862851827, 2.70816862851827, 2.70816862851827, 
+    2.70816862851827, 2.70816862851827, 2.70816862851827,
+  89.0776120359263, 175.548488687553, 160.995292416981, 139.633841114898, 
+    110.522481242557, 75.3512665773052, 40.3311837224598, 14.6423313292972, 
+    3.24980235422193, 3.24980235422193, 3.24980235422193, 3.24980235422193, 
+    3.24980235422193, 3.24980235422193, 3.24980235422193,
+  36.5446613480723, 72.0198927948935, 66.0493507351717, 57.2856784061118, 
+    45.3425564072029, 30.913340134279, 16.5461266553681, 6.00711028894243, 
+    1.33325224788592, 1.33325224788592, 1.33325224788592, 1.33325224788592, 
+    1.33325224788592, 1.33325224788592, 1.33325224788592,
+  61.6691160248721, 121.533569091383, 111.458279365602, 96.6695823103137, 
+    76.5155639371549, 52.1662614765959, 27.9215887309337, 10.1369986125904, 
+    2.24986316830749, 2.24986316830749, 2.24986316830749, 2.24986316830749, 
+    2.24986316830749, 2.24986316830749, 2.24986316830749,
+  85.6515500345445, 168.796623738032, 154.803165785559, 134.263308764325, 
+    106.271616579382, 72.4531409397165, 38.7799843485191, 14.0791647397088, 
+    3.12480995598262, 3.12480995598262, 3.12480995598262, 3.12480995598262, 
+    3.12480995598262, 3.12480995598262, 3.12480995598262,
+  85.6515500345445, 168.796623738032, 154.803165785559, 134.263308764325, 
+    106.271616579382, 72.4531409397165, 38.7799843485191, 14.0791647397088, 
+    3.12480995598262, 3.12480995598262, 3.12480995598262, 3.12480995598262, 
+    3.12480995598262, 3.12480995598262, 3.12480995598262,
+  73.0893226961447, 144.039785589787, 132.098701470343, 114.571356812224, 
+    90.6851128144058, 61.8266802685581, 33.0922533107363, 12.0142205778849, 
+    2.66650449577184, 2.66650449577184, 2.66650449577184, 2.66650449577184, 
+    2.66650449577184, 2.66650449577184, 2.66650449577184,
+  11.4202066712726, 22.5062164984042, 20.6404221047411, 17.9017745019099, 
+    14.1695488772509, 9.6604187919622, 5.17066457980255, 1.87722196529451, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435, 0.41664132746435, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435,
+  11.4202066712726, 22.5062164984042, 20.6404221047411, 17.9017745019099, 
+    14.1695488772509, 9.6604187919622, 5.17066457980255, 1.87722196529451, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435, 0.41664132746435, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435,
+  11.4202066712726, 22.5062164984042, 20.6404221047411, 17.9017745019099, 
+    14.1695488772509, 9.6604187919622, 5.17066457980255, 1.87722196529451, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435, 0.41664132746435, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435,
+  11.4202066712726, 22.5062164984042, 20.6404221047411, 17.9017745019099, 
+    14.1695488772509, 9.6604187919622, 5.17066457980255, 1.87722196529451, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435, 0.41664132746435, 
+    0.41664132746435, 0.41664132746435, 0.41664132746435 ;
+
+ KM_DECOMP_NH4 = 0.18 ;
+
+ KM_DECOMP_NO3 = 0.41 ;
+
+ KM_DECOMP_P = 0.2 ;
+
+ KM_NIT = 0.76 ;
+
+ KM_DEN = 0.11 ;
+
+ VMAX_NFIX = 1.58e-09 ;
+
+ KM_NFIX = 50 ;
+
+ VMAX_PTASE_vr =
+  3.62020551479341e-09, 7.13447062999414e-09, 6.54301380720294e-09, 
+    5.67486251710545e-09, 4.49174699408854e-09, 3.06235275705202e-09, 
+    1.63910067179741e-09, 5.9507936299836e-10, 1.32075300806199e-10, 0, 0, 0, 
+    0, 0, 0 ;
+
+ KM_PTASE = 150 ;
+
+ lamda_ptase = 15 ;
+
+ leafcn_obs = 33, 24, 26, 40, 20, 23, 28, 40, 39, 22, 34, 47, 18, 18, 14, 33, 
+    33, 33, 33, 33, 33, 33, 33, 33, 33 ;
+
+ frootcn_obs = 42, 43.9, 58.8, 58.2, 40.1, 87.1, 45.5, 45.9, 50.4, 48.6, 
+    34.8, 38, 50, 50, 52.3, 42, 42, 42, 42, 42, 42, 42, 42, 42, 42 ;
+
+ livewdcn_obs = 240, 491.7, 607, 607, 307.3, 303.3, 363.2, 330.1, 607, 76, 
+    76, 76, 0, 0, 0, 240, 240, 240, 240, 240, 240, 240, 240, 240, 240 ;
+
+ deadwdcn_obs = 2400, 781.3, 833.3, 833.3, 381.8, 505.1, 383.7, 500, 833.3, 
+    76, 76, 76, 0, 0, 0, 2400, 2400, 2400, 2400, 2400, 2400, 2400, 2400, 
+    2400, 2400 ;
+
+ leafcp_obs = 860, 267.9, 278.2, 383.8, 339.08, 295.91, 528.2, 693, 629.18, 
+    322.66, 598.08, 517, 162, 188.24, 185.9, 860, 860, 860, 860, 860, 860, 
+    860, 860, 860, 860 ;
+
+ frootcp_obs = 378, 478.882033898306, 510.142292490119, 504.936758893281, 
+    994.48, 449.61415909091, 1006.05555555556, 656.807142857142, 
+    450.348387096774, 998.578125, 715.03125, 323, 480.952380952381, 
+    480.952380952381, 645.890710382514, 378, 378, 378, 378, 378, 378, 378, 
+    378, 378, 378 ;
+
+ livewdcp_obs = 2200, 5212.02, 6616.3, 6616.3, 4363.66, 3305.97, 2615.04, 
+    3598.09, 6616.3, 661.2, 661.2, 661.2, 0, 0, 0, 2200, 2200, 2200, 2200, 
+    2200, 2200, 2200, 2200, 2200, 2200 ;
+
+ deadwdcp_obs = 22000, 35549.15, 63164.14, 63164.14, 13630.26, 24396.33, 
+    26782.26, 24150, 63164.14, 661.2, 661.2, 661.2, 0, 0, 0, 22000, 22000, 
+    22000, 22000, 22000, 22000, 22000, 22000, 22000, 22000 ;
+
+ s_vc = 0, 20.72, 20.72, 22.05, 17.51, 33.75, 17.51, 33.79, 33.79, 32.09, 
+    33.14, 33.14, 45.29, 45.29, 45.29, 62.75, 62.75, 62.75, 62.75, 62.75, 
+    62.75, 62.75, 62.75, 62.75, 62.75 ;
+
+ i_vc = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0 ;
+
+ fnr = 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 
+    7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 7.16, 
+    7.16, 7.16 ;
+
+ act25 = 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 
+    3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6, 3.6 ;
+
+ kcha = 79430, 79430, 79430, 79430, 79430, 79430, 79430, 79430, 79430, 79430, 
+    79430, 79430, 79430, 79430, 79430, 79430, 79430, 79430, 79430, 79430, 
+    79430, 79430, 79430, 79430, 79430 ;
+
+ koha = 36380, 36380, 36380, 36380, 36380, 36380, 36380, 36380, 36380, 36380, 
+    36380, 36380, 36380, 36380, 36380, 36380, 36380, 36380, 36380, 36380, 
+    36380, 36380, 36380, 36380, 36380 ;
+
+ cpha = 37830, 37830, 37830, 37830, 37830, 37830, 37830, 37830, 37830, 37830, 
+    37830, 37830, 37830, 37830, 37830, 37830, 37830, 37830, 37830, 37830, 
+    37830, 37830, 37830, 37830, 37830 ;
+
+ vcmaxha = 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 
+    72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 
+    72000, 72000, 72000, 72000, 72000, 72000 ;
+
+ jmaxha = 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 
+    50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 
+    50000, 50000, 50000, 50000, 50000, 50000 ;
+
+ tpuha = 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 
+    72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 72000, 
+    72000, 72000, 72000, 72000, 72000, 72000 ;
+
+ lmrha = 46390, 46390, 46390, 46390, 46390, 46390, 46390, 46390, 46390, 
+    46390, 46390, 46390, 46390, 46390, 46390, 46390, 46390, 46390, 46390, 
+    46390, 46390, 46390, 46390, 46390, 46390 ;
+
+ vcmaxhd = 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 
+    200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 
+    200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000 ;
+
+ jmaxhd = 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 
+    200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 
+    200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000 ;
+
+ tpuhd = 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 
+    200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000, 
+    200000, 200000, 200000, 200000, 200000, 200000, 200000, 200000 ;
+
+ lmrhd = 150650, 150650, 150650, 150650, 150650, 150650, 150650, 150650, 
+    150650, 150650, 150650, 150650, 150650, 150650, 150650, 150650, 150650, 
+    150650, 150650, 150650, 150650, 150650, 150650, 150650, 150650 ;
+
+ lmrse = 490, 490, 490, 490, 490, 490, 490, 490, 490, 490, 490, 490, 490, 
+    490, 490, 490, 490, 490, 490, 490, 490, 490, 490, 490, 490 ;
+
+ qe = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.05, 0, 0, 0.05, 0, 0, 0, 0, 
+    0, 0, 0 ;
+
+ theta_cj = 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 0.98, 
+    0.98, 0.98, 0.98, 0.8, 0.98, 0.98, 0.8, 0.98, 0.98, 0.98, 0.98, 0.98, 
+    0.98, 0.98 ;
+
+ bbbopt = 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 
+    10000, 10000, 10000, 10000, 10000, 40000, 10000, 10000, 40000, 10000, 
+    10000, 10000, 10000, 10000, 10000, 10000 ;
+
+ mbbopt = 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 4, 9, 9, 4, 9, 9, 9, 9, 
+    9, 9, 9 ;
+
+ nstor = 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0 ;
+
+ tc_stress = -2 ;
+}

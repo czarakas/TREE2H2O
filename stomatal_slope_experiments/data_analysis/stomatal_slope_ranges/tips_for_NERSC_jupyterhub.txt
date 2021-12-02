@@ -1,0 +1,7 @@
+To use your own conda environment on Jupyter (i.e. use you own Jupyter kernel), do this in terminal:
+>> module load python
+>> conda create -n model_analysis python=3.7 ipykernel xarray matplotlib cartopy altair dask pandas scipy netcdf4 seaborn statsmodels
+>> source activate model_analysis
+>> python -m ipykernel install --user --name model_analysis
+
+Then it shows up in the dropdown list for kernels in the top right of Jupyter lab.
