@@ -8,8 +8,8 @@
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = testCN_1850_001                                     # only used to name the job in the batch system 
-set compset        = 1850_CAM5_CLM45%CN_CICE_DOCN%SOM_MOSART_SGLC_SWAV   # indicates which model components and forcings to use
+set job_name       = E3SMv1.0BGC_1850_003                                # only used to name the job in the batch system 
+set compset        = 1850_CAM5_CLM45%BGC_CICE_DOCN%SOM_MOSART_SGLC_SWAV   # indicates which model components and forcings to use
 set resolution     = ne30_f19_g16                                        # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time
@@ -22,7 +22,7 @@ set run_refcase = 20171228.beta3rc13_1850.ne30_oECv3_ICG.edison
 set run_refdate = 0331-01-01
 
 ### DIRECTORIES
-set code_root_dir               = ~/E3SM_source/E3SM_v1.1                        #directory for sources E3SM code
+set code_root_dir               = ~/E3SM_source/E3SM_v1.0                        #directory for sources E3SM code
 set case_dir                    = ~/model_cases/e3sm_cases
 set scratch_dir                 = /global/cscratch1/sd/czarakas
 set e3sm_simulations_dir        = ${scratch_dir}/E3SM_simulations
@@ -30,50 +30,13 @@ set case_build_dir              = ${e3sm_simulations_dir}/${case_name}/build
 set case_run_dir                = ${e3sm_simulations_dir}/${case_name}/run
 set short_term_archive_root_dir = ${e3sm_simulations_dir}/${case_name}/archive
 
-#=============================================================
-# HANDLE PROCESSOR CONFIGURATION
-#=============================================================
-### PROCESSOR CONFIGURATION
-set processor_config = S
-#Indicates what processor configuration to use.
-# 1=single processor, S=small, M=medium, L=large, X1=very large, X2=very very large
-
-alias lowercase "echo \!:1 | tr '[A-Z]' '[a-z]'"  #make function which lowercases any strings passed to it.
-set lower_case = `lowercase $processor_config`
-switch ( $lower_case )
-  case 's':
-    set std_proc_configuration = 'S'
-    breaksw
-  case 'm':
-    set std_proc_configuration = 'M'
-    breaksw
-  case 'l':
-    set std_proc_configuration = 'L'
-    breaksw
-  case 'x1':
-    set std_proc_configuration = 'X1'
-    breaksw
-  case 'x2':
-    set std_proc_configuration = 'X2'
-    breaksw
-  case '1':
-    set std_proc_configuration = 'M'
-    breaksw
-  case 'custom*':
-    # Note: this is just a placeholder so create_newcase will work.
-    #       The actual configuration should be set under 'CUSTOMIZE PROCESSOR CONFIGURATION'
-    set std_proc_configuration = 'M'
-    breaksw
-  default:
-    e3sm_print 'ERROR: $processor_config='$processor_config' is not recognized'
-    exit 40
-    breaksw
-endsw
-
 #============================================
 # CREATE NEW CASE
 #============================================
 # rm -rf ${case_dir}/${case_name}
+
+set std_proc_configuration = 'S' #Indicates what processor configuration to use.
+# 1=single processor, S=small, M=medium, L=large, X1=very large, X2=very very large
 
 cd ${code_root_dir}/cime/scripts
 
@@ -90,11 +53,11 @@ cd ${case_dir}/${case_name}
 # MACHINE
 ./xmlchange MACH=$machine
 
-# RUNTIME 
-./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
-./xmlchange RUN_STARTDATE=0001-01-01
+# SLAB OCEAN
+./xmlchange DOCN_SOM_FILENAME=pop_frc.b.c40.B1850CN.f19_g16.100105.nc 
 
-#SIMULATION LENGTH
+# RUNTIME AND SIMULATION LENGTH
+./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
 ./xmlchange --id STOP_OPTION --val ndays
 ./xmlchange --id STOP_N      --val 3
 
@@ -113,6 +76,8 @@ cd ${case_dir}/${case_name}
 ./xmlchange --id DOUT_S_ROOT --val $short_term_archive_root_dir 
 
 # SETUP SIMULATION INITIALIZATION
+./xmlchange RUN_STARTDATE=0001-01-01
+
 set model_start_type = $model_start_type
 if ( $model_start_type == 'initial' ) then
   ./xmlchange --id RUN_TYPE --val "startup"
@@ -200,20 +165,7 @@ EOF
 #============================================
 # BATCH JOB OPTIONS
 #============================================
-
-# I don't understand what this does
 set batch_options = ''
-
-if ( $machine =~ 'cori*' || $machine == edison ) then
-    echo 'CORI machine'
-    set batch_options = "--job-name=${job_name} --output=batch_output/${case_name}.o%j"
-
-    sed -i /"#SBATCH \( \)*--job-name"/c"#SBATCH  --job-name=ST+${job_name}"                  $shortterm_archive_script
-    sed -i /"#SBATCH \( \)*--job-name"/a"#SBATCH  --account=${project}"                       $shortterm_archive_script
-    sed -i /"#SBATCH \( \)*--output"/c'#SBATCH  --output=batch_output/ST+'${case_name}'.o%j'  $shortterm_archive_script
-
-endif
-
 
 #=================================================
 # SUBMIT SIMULATION

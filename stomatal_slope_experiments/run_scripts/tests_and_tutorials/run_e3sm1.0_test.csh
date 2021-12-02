@@ -9,7 +9,7 @@
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.1_1850_004                                # only used to name the job in the batch system 
+set job_name       = test_E3SMv1.0_1850_003                                # only used to name the job in the batch system 
 set compset        = A_WCYCL1850S_CMIP6   # indicates which model components and forcings to use
 set resolution     = ne30_oECv3_ICG                                       # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
@@ -23,7 +23,7 @@ set run_refcase = 20171228.beta3rc13_1850.ne30_oECv3_ICG.edison
 set run_refdate = 0331-01-01
 
 ### DIRECTORIES
-set code_root_dir               = ~/E3SM_source/E3SM_v1.1                        #directory for sources E3SM code
+set code_root_dir               = ~/E3SM_source/E3SM_v1.0                        #directory for sources E3SM code
 set case_dir                    = ~/model_cases/e3sm_cases
 set scratch_dir                 = /global/cscratch1/sd/czarakas
 set e3sm_simulations_dir        = ${scratch_dir}/E3SM_simulations
