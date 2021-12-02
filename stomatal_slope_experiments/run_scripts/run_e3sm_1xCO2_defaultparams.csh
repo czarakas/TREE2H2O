@@ -8,19 +8,15 @@
 #============================================
 
 ### BASIC INFO ABOUT RUN
-# only used to name the job in the batch system
-set job_name       = testCN_1850_001             
-set compset        = 1850_CAM5_CLM45%CN_CICE_DOCN%SOM_MOSART_SGLC_SWAV  # indicates which model components and forcings to use
+set job_name       = testCN_1850_001                                     # only used to name the job in the batch system 
+set compset        = 1850_CAM5_CLM45%CN_CICE_DOCN%SOM_MOSART_SGLC_SWAV   # indicates which model components and forcings to use
 set resolution     = ne30_f19_g16                                        # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time
-
-### CASE_NAME
-set case_name      = ${job_name}.ne30_oEC.cori-kn
+set case_name      = ${job_name}.ne30_oEC.cori-kn                        # case name used for archiving etc.
 
 ### STARTUP TYPE
-set model_start_type = initial
-              #how to initialize model. options are:  initial, continue, or hybrid
+set model_start_type = initial              #how to initialize model. options are:  initial, continue, or hybrid
 set run_refdir = e3sm_init
 set run_refcase = 20171228.beta3rc13_1850.ne30_oECv3_ICG.edison
 set run_refdate = 0331-01-01
@@ -35,7 +31,7 @@ set case_run_dir                = ${e3sm_simulations_dir}/${case_name}/run
 set short_term_archive_root_dir = ${e3sm_simulations_dir}/${case_name}/archive
 
 #=============================================================
-# HANDLE STANDARD PROCESSOR CONFIGURATIONS
+# HANDLE PROCESSOR CONFIGURATION
 #=============================================================
 ### PROCESSOR CONFIGURATION
 set processor_config = S
@@ -86,10 +82,6 @@ set configure_options = "${configure_options} --mach ${machine} --project ${proj
 
 ./create_newcase ${configure_options}
 
-# --script-root ${case_scripts_dir} 
-# --handle-preexisting-dirs u
-# --output-root ${build_root}
-
 #============================================
 # CHANGE XML SETTINGS
 #============================================
@@ -98,11 +90,9 @@ cd ${case_dir}/${case_name}
 # MACHINE
 ./xmlchange MACH=$machine
 
-# 
+# RUNTIME 
 ./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
 ./xmlchange RUN_STARTDATE=0001-01-01
-./xmlchange --id HIST_OPTION --val ndays
-./xmlchange --id HIST_N      --val 1
 
 #SIMULATION LENGTH
 ./xmlchange --id STOP_OPTION --val ndays
@@ -153,6 +143,8 @@ endif
 #============================================
 # MODIFY NAMELISTS
 #============================================
+
+#--------------- Atmosphere -----------------
 cat <<EOF >> user_nl_cam
  !----------------------------------------------------------------------------------
  !------------------------------HISTORY FILES--------------------------------------
@@ -163,6 +155,7 @@ cat <<EOF >> user_nl_cam
 
 EOF
 
+#--------------- Land -----------------------
 cat <<EOF >> user_nl_clm
  ! finidat
  ! use_init_interp
@@ -191,6 +184,8 @@ cat <<EOF >> user_nl_clm
 
 EOF
 
+#--------------- Coupler --------------------
+
 cat <<EOF >> user_nl_cpl
 
  histaux_a2x3hr=.true.
@@ -206,6 +201,7 @@ EOF
 # BATCH JOB OPTIONS
 #============================================
 
+# I don't understand what this does
 set batch_options = ''
 
 if ( $machine =~ 'cori*' || $machine == edison ) then
@@ -222,5 +218,5 @@ endif
 #=================================================
 # SUBMIT SIMULATION
 #=================================================
-#./xmlchange --id JOB_QUEUE --val 'debug' #if machine is cab or sierra, this should be 'pdebug'
+#./xmlchange --id JOB_QUEUE --val 'debug'
 ./case.submit --batch-args " ${batch_options} "
