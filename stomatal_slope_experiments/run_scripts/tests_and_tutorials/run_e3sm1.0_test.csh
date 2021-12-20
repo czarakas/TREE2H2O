@@ -9,7 +9,7 @@
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.0_1850_003                                # only used to name the job in the batch system 
+set job_name       = test_E3SMv1.0_1850_004                                # only used to name the job in the batch system 
 set compset        = A_WCYCL1850S_CMIP6   # indicates which model components and forcings to use
 set resolution     = ne30_oECv3_ICG                                       # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)

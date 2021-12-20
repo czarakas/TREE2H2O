@@ -2,14 +2,14 @@
 
 # Modified from run_e3sm.DECKv1b_piControl.ne30_oEC.cori-knl.csh (downloaded on 30Nov2021)
 # Last edited by Claire Zarakas 02Dec2021
-# Successfully ran on 02Dec2021
+# To run E3SM1.1, need to manually download FATES and the other clm external_models
 
 #============================================
 # RUN SETTINGS
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.1_1850_004                                # only used to name the job in the batch system 
+set job_name       = test_E3SMv1.1_1850_006                                # only used to name the job in the batch system 
 set compset        = A_WCYCL1850S_CMIP6   # indicates which model components and forcings to use
 set resolution     = ne30_oECv3_ICG                                       # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
@@ -58,7 +58,7 @@ cd ${case_dir}/${case_name}
 # ./xmlchange DOCN_SOM_FILENAME=pop_frc.b.c40.B1850CN.f19_g16.100105.nc 
 
 # RUNTIME AND SIMULATION LENGTH
-./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
+./xmlchange JOB_WALLCLOCK_TIME=01:00 --subgroup case.run
 ./xmlchange --id STOP_OPTION --val ndays
 ./xmlchange --id STOP_N      --val 3
 
