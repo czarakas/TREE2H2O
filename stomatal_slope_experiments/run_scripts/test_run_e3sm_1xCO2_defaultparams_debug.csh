@@ -1,7 +1,7 @@
 #! /bin/csh -fe
 
 # Modified from run_e3sm.DECKv1b_piControl.ne30_oEC.cori-knl.csh (downloaded on 30Nov2021)
-# Last edited by Claire Zarakas 20Dec2021
+# Last edited by Claire Zarakas 22Dec2021
 
 #============================================
 # RUN SETTINGS
