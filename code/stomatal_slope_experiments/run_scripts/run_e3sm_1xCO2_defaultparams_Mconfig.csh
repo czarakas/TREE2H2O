@@ -1,17 +1,17 @@
 #! /bin/csh -fe
 
 # Modified from run_e3sm.DECKv1b_piControl.ne30_oEC.cori-knl.csh (downloaded on 30Nov2021)
-# Last edited by Claire Zarakas 22Dec2021
+# Last edited by Claire Zarakas 23Dec2021
 
 #============================================
 # RUN SETTINGS
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.1BGC_013                               # only used to name the job in the batch system 
+set job_name       = E3SMv1.1_1xCO2_defaultparams_Mconfig                               # only used to name the job in the batch system 
 set compset        = 1850_CAM5%CMIP6_CLM45%CNPRDCTCBC_MPASCICE_DOCN%SOM_MOSART_SGLC_SWAV_BGC%BCRC_TEST 
 set resolution     = ne30_oECv3 #ne30_g16 #ne30_oECv3                                        # model resolution to use
-set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
+set machine        = cori-knl #cori-knl or cori-haswell                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time
 set case_name      = ${job_name}.${resolution}.${machine}                        # case name used for archiving etc.
 
@@ -30,7 +30,7 @@ set dir_run_to_branch_from = /global/cfs/cdirs/e3sm/inputdata/e3sm_init/20181130
 #============================================
 # rm -rf ${case_dir}/${case_name}
 
-set std_proc_configuration = 'S' #Indicates what processor configuration to use.
+set std_proc_configuration = 'M' #Indicates what processor configuration to use.
 # 1=single processor, S=small, M=medium, L=large, X1=very large, X2=very very large
 
 cd ${code_root_dir}/cime/scripts
@@ -57,13 +57,13 @@ cd ${case_dir}/${case_name}
 ./case.setup --reset
 
 # RUNTIME AND SIMULATION LENGTH
-./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
-./xmlchange --id STOP_OPTION --val ndays
-./xmlchange --id STOP_N      --val 3
+./xmlchange JOB_WALLCLOCK_TIME=11:55 --subgroup case.run
+./xmlchange --id STOP_OPTION --val nyears
+./xmlchange --id STOP_N      --val 1
 
 #RESTART FREQUENCY
-./xmlchange --id REST_OPTION --val ndays
-./xmlchange --id REST_N      --val 3
+./xmlchange --id REST_OPTION --val nyears
+./xmlchange --id REST_N      --val 1
 ./xmlchange --id RESUBMIT --val 0
 
 #COUPLER BUDGETS / HISTORY FILES
@@ -110,9 +110,16 @@ cat <<EOF >> user_nl_cam
  !----------------------------------------------------------------------------------
  !------------------------------HISTORY FILES--------------------------------------
  !----History files (h2): daily output
- fincl2 = 'TSMN','TSMX','PRECT'
- nhtfrq(2)=-24
- mfilt(2)=365
+ !fincl2 = 'TSMN','TSMX','PRECT'
+ !nhtfrq(2)=-24
+ !mfilt(2)=365
+
+
+ !----------------------------------------------------------------------------------
+ !------------------------------HISTORY FILES--------------------------------------
+ !----History files (h2): daily output
+ fincl2 = 'FLDS','FSDS','FSNTOA','FSUTOA','FLNT','FLUT','TREFHT','TS'
+ nhtfrq(2)=0
 
 EOF
 
@@ -130,16 +137,16 @@ cat <<EOF >> user_nl_clm
  hist_fincl1 += 'EFLX_LH_TOT'
 
  !----History files (h1): monthly output for driving SP mode
- hist_fincl2 = 'TLAI'
+ hist_fincl2 = 'TLAI','TSAI','HBOT','HTOP'
  hist_type1d_pertape(2) = 'PFTS'
  hist_dov2xy(2)= .false.
 
  !----History files (h2): daily output
- hist_fincl3 = 'EFLX_LH_TOT'
+ hist_fincl3 = 'EFLX_LH_TOT','TLAI','TOTVEGC'
 
  !----History files (h3): daily output at local noon
  
- hist_nhtfrq = 0,0,-24
+ hist_nhtfrq = 0,0,0
  hist_mfilt=120,120,365
  !----------------------------------------------------------------------------------
 
@@ -156,5 +163,5 @@ set batch_options = ''
 #=================================================
 # SUBMIT SIMULATION
 #=================================================
-./xmlchange --id JOB_QUEUE --val 'debug'
+#./xmlchange --id JOB_QUEUE --val 'debug'
 ./case.submit --batch-args " ${batch_options} "
