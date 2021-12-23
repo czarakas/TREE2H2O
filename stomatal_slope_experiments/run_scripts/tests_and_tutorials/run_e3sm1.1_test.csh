@@ -11,6 +11,7 @@
 ### BASIC INFO ABOUT RUN
 set job_name       = test_E3SMv1.1_1850_006                                # only used to name the job in the batch system 
 set compset        = A_WCYCL1850S_CMIP6   # indicates which model components and forcings to use
+# Note: A_WCYCL1850S_CMIP6 = 1850_CAM5%CMIP6_CLM45%SPBC_MPASCICE%SPUNUP_MPASO%SPUNUP_MOSART_SGLC_SWAV 
 set resolution     = ne30_oECv3_ICG                                       # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time

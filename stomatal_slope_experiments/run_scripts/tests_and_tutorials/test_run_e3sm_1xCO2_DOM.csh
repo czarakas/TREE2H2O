@@ -1,19 +1,23 @@
 #! /bin/csh -fe
 
 # Modified from run_e3sm.DECKv1b_piControl.ne30_oEC.cori-knl.csh (downloaded on 30Nov2021)
-# Last edited by Claire Zarakas 22Dec2021
+# Last edited by Claire Zarakas 20Dec2021
 
 #============================================
 # RUN SETTINGS
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.1BGC_013                               # only used to name the job in the batch system 
-set compset        = 1850_CAM5%CMIP6_CLM45%CNPRDCTCBC_MPASCICE_DOCN%SOM_MOSART_SGLC_SWAV_BGC%BCRC_TEST 
+set job_name       = test_E3SMv1.1BGC_1850_DOM_002                               # only used to name the job in the batch system 
+set compset        = 1850_CAM5_CLM45%CNPRDCTCBC_MPASCICE_DOCN%DOM_MOSART_SGLC_SWAV_BGC%BDRD
+# TARGET COMPSET: 1850_CAM5_CLM45%BGC_CICE_DOCN%SOM_MOSART_SGLC_SWAV
+# Differences from compset that worked
+# CICE vs. MPASCICE%SPUNUP
+# DOCN%SOM vs. MPASO%SPUNUP
 set resolution     = ne30_oECv3 #ne30_g16 #ne30_oECv3                                        # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time
-set case_name      = ${job_name}.${resolution}.${machine}                        # case name used for archiving etc.
+set case_name      = ${job_name}.ne30_oECv3.cori-kn                        # case name used for archiving etc.
 
 ### DIRECTORIES
 set code_root_dir               = ~/E3SM_source/E3SM_v1.1                        #directory for sources E3SM code
@@ -23,7 +27,6 @@ set e3sm_simulations_dir        = ${scratch_dir}/E3SM_simulations
 set case_build_dir              = ${e3sm_simulations_dir}/${case_name}/build
 set case_run_dir                = ${e3sm_simulations_dir}/${case_name}/run
 set short_term_archive_root_dir = ${e3sm_simulations_dir}/${case_name}/archive
-set dir_run_to_branch_from = /global/cfs/cdirs/e3sm/inputdata/e3sm_init/20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison/0324-01-01-00000
 
 #============================================
 # CREATE NEW CASE
@@ -35,7 +38,7 @@ set std_proc_configuration = 'S' #Indicates what processor configuration to use.
 
 cd ${code_root_dir}/cime/scripts
 
-set configure_options = "--case ${case_dir}/${case_name} --compset ${compset} --res ${resolution} --pecount ${std_proc_configuration}"# --handle-preexisting-dirs u"
+set configure_options = "--case ${case_dir}/${case_name} --compset ${compset} --res ${resolution} --pecount ${std_proc_configuration} --handle-preexisting-dirs u"
 set configure_options = "${configure_options} --mach ${machine} --project ${project}"
 
 ./create_newcase ${configure_options}
@@ -47,14 +50,6 @@ cd ${case_dir}/${case_name}
 
 # MACHINE
 ./xmlchange MACH=$machine
-
-# SLAB OCEAN
-./xmlchange DOCN_SOM_FILENAME=pop_frc.1x1d.090130.nc #this is the default slab ocean
-
-#============================================
-# SET UP CASE
-#============================================
-./case.setup --reset
 
 # RUNTIME AND SIMULATION LENGTH
 ./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
@@ -76,29 +71,31 @@ cd ${case_dir}/${case_name}
 ./xmlchange --id DOUT_S_ROOT --val $short_term_archive_root_dir 
 
 # SETUP SIMULATION INITIALIZATION
-./xmlchange RUN_TYPE=hybrid
-./xmlchange GET_REFCASE=FALSE
-./xmlchange RUN_STARTDATE=0324-01-01 #0001-01-01
-./xmlchange START_TOD=0
-./xmlchange RUN_REFCASE=20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison #'20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison'
-./xmlchange RUN_REFDATE=0324-01-01 #0370-01-01
-./xmlchange CONTINUE_RUN=FALSE
-./xmlchange RUN_REFDIR=$dir_run_to_branch_from
+./xmlchange RUN_STARTDATE=0001-01-01
+
+./xmlchange --id RUN_TYPE --val "startup"
+./xmlchange --id CONTINUE_RUN --val "FALSE"
+
+# CONTINUE
+#./xmlchange --id CONTINUE_RUN --val "TRUE"
+
+# HYBRID
+#  ./xmlchange  --id RUN_TYPE --val "hybrid"
+#  ./xmlchange  --id RUN_REFCASE --val 20171228.beta3rc13_1850.ne30_oECv3_ICG.edison
+#  ./xmlchange  --id RUN_REFDATE --val 0331-01-01
+#  ./xmlchange  --id GET_REFCASE  --val "TRUE"
+#  ./xmlchange  --id RUN_REFDIR  --val e3sm_init
+#  ./xmlchange  --id CONTINUE_RUN --val "FALSE"
 
 
 #============================================
-# COPY IN RESUBMIT FILES
+# SET UP CASE
 #============================================
-cd /global/cscratch1/sd/czarakas/e3sm_scratch/cori-knl/$case_name/run
-cp ${dir_run_to_branch_from}/* .
-#cp /global/cfs/cdirs/e3sm/inputdata/e3sm_init/20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison/0370-01-01-00000/* .
-cd ${case_dir}/${case_name}
-
+./case.setup #--reset
 
 #============================================
 # BUILD MODEL
 #============================================
-# ./xmlchange --id DEBUG --val TRUE
 ./case.build
 
 #============================================

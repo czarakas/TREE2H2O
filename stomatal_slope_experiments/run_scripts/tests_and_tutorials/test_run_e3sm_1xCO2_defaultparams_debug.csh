@@ -8,8 +8,9 @@
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.1BGC_001                               # only used to name the job in the batch system 
-set compset        = 1850_CAM5_CLM45%BGC_MPASCICE_DOCN%SOM_MOSART_SGLC_SWAV_TEST
+set job_name       = test_E3SMv1.1BGC_004                               # only used to name the job in the batch system 
+set compset        = 1850_CAM5_CLM45%CNPRDCTCBC_MPASCICE_DOCN%SOM_MOSART_SGLC_SWAV_BGC%BDRD_TEST 
+#1850_EAM%CMIP6_ELM%SPBC_MPASSI_DOCN%DOM_MOSART_SGLC_SWAV #_TEST #1850_EAM_ELM%BGC_MPASSI_DOCN%SOM_MOSART_SGLC_SWAV_TEST
 set resolution     = ne30_oECv3 #ne30_g16 #ne30_oECv3                                        # model resolution to use
 set machine        = cori-knl                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time
@@ -49,7 +50,7 @@ cd ${case_dir}/${case_name}
 
 # SLAB OCEAN
 #./xmlchange DOCN_SOM_FILENAME=pop_frc.b.c40.B1850CN.f19_g16.100105.nc 
-./xmlchange DOCN_SOM_FILENAME=pop_frc.b.e11.B1850C5CN.f09_g16.005.082914.nc
+./xmlchange DOCN_SOM_FILENAME=pop_frc.1x1d.090130.nc #pop_frc.b.e11.B1850C5CN.f09_g16.005.082914.nc
 
 # RUNTIME AND SIMULATION LENGTH
 ./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
