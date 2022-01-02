@@ -8,10 +8,10 @@
 #============================================
 
 ### BASIC INFO ABOUT RUN
-set job_name       = test_E3SMv1.1BGC_015                               # only used to name the job in the batch system 
-set compset        = 1850_CAM5%CMIP6_CLM45%CNPRDCTCBC_MPASCICE_DOCN%SOM_MOSART_SGLC_SWAV_BGC%BCRC_TEST 
+set job_name       = test_v0009                               # only used to name the job in the batch system 
+set compset        = 1850_CAM5%CMIP6_CLM45%CNPRDCTCBC_MPASCICE_DOCN%SOM_MOSART_SGLC_SWAV_TEST #BGC%BCRC_TEST 
 set resolution     = ne30_oECv3 #ne30_g16 #ne30_oECv3                                        # model resolution to use
-set machine        = cori-haswell #cori-knl or cori-haswell                                            # machine to run simulation on (note this should be lowercase)
+set machine        = cori-haswell                                            # machine to run simulation on (note this should be lowercase)
 setenv project       m3782                                               # what project code to charge for your run time
 set case_name      = ${job_name}.${resolution}.${machine}                        # case name used for archiving etc.
 
@@ -24,6 +24,7 @@ set case_build_dir              = ${e3sm_simulations_dir}/${case_name}/build
 set case_run_dir                = ${e3sm_simulations_dir}/${case_name}/run
 set short_term_archive_root_dir = ${e3sm_simulations_dir}/${case_name}/archive
 set dir_run_to_branch_from = /global/cfs/cdirs/e3sm/inputdata/e3sm_init/20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison/0324-01-01-00000
+set dir_runscript = /global/homes/c/czarakas/TREE2H2O/code/stomatal_slope_experiments/run_scripts/tests_and_tutorials
 
 #============================================
 # CREATE NEW CASE
@@ -35,10 +36,30 @@ set std_proc_configuration = 'S' #Indicates what processor configuration to use.
 
 cd ${code_root_dir}/cime/scripts
 
-set configure_options = "--case ${case_dir}/${case_name} --compset ${compset} --res ${resolution} --pecount ${std_proc_configuration}"# --handle-preexisting-dirs u"
+set configure_options = "--case ${case_dir}/${case_name} --compset ${compset} --res ${resolution} --pecount ${std_proc_configuration} --handle-preexisting-dirs u"
 set configure_options = "${configure_options} --mach ${machine} --project ${project}"
 
 ./create_newcase ${configure_options}
+
+cd ${case_dir}/${case_name}
+
+#./xmlchange NTASKS_PER_INST=256
+#./xmlchange NTASKS=256
+./xmlchange NTASKS_ATM=1024
+./xmlchange NTASKS_LND=1024
+./xmlchange NTASKS_ICE=1024
+./xmlchange NTASKS_OCN=1024
+./xmlchange NTASKS_ROF=1024
+./xmlchange NTASKS_GLC=1024
+./xmlchange NTASKS_WAV=1024
+
+./case.setup
+#============================================
+# COPY RUN SCRIPT TO FOLDER
+#============================================
+set iscript_name=`basename $0`
+
+cp $dir_runscript/$iscript_name .
 
 #============================================
 # CHANGE XML SETTINGS
@@ -54,10 +75,7 @@ cd ${case_dir}/${case_name}
 #============================================
 # SET UP CASE
 #============================================
-echo setting up case
-./case.setup --reset
-echo >>> case set up
-
+#./case.setup --reset
 
 # RUNTIME AND SIMULATION LENGTH
 ./xmlchange JOB_WALLCLOCK_TIME=00:30 --subgroup case.run
@@ -78,30 +96,37 @@ echo >>> case set up
 ./xmlchange --id DOUT_S --val TRUE
 ./xmlchange --id DOUT_S_ROOT --val $short_term_archive_root_dir 
 
+#============================================
 # SETUP SIMULATION INITIALIZATION
+#============================================
+# If initial
+#./xmlchange RUN_TYPE=startup
+#./xmlchange RUN_STARTDATE=0001-01-01
+
+# If branching 
 ./xmlchange RUN_TYPE=hybrid
 ./xmlchange GET_REFCASE=FALSE
 ./xmlchange RUN_STARTDATE=0324-01-01 #0001-01-01
 ./xmlchange START_TOD=0
 ./xmlchange RUN_REFCASE=20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison #'20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison'
 ./xmlchange RUN_REFDATE=0324-01-01 #0370-01-01
-./xmlchange CONTINUE_RUN=FALSE
 ./xmlchange RUN_REFDIR=$dir_run_to_branch_from
 
+./xmlchange CONTINUE_RUN=FALSE
 
 #============================================
+# SET UP CASE
+#============================================
+#./case.setup
+
 # COPY IN RESUBMIT FILES
-#============================================
-cd /global/cscratch1/sd/czarakas/e3sm_scratch/cori-knl/$case_name/run
+cd /global/cscratch1/sd/czarakas/e3sm_scratch/$machine/$case_name/run
 cp ${dir_run_to_branch_from}/* .
-#cp /global/cfs/cdirs/e3sm/inputdata/e3sm_init/20181130_BCRC_1850SPINUP_OIBGC.ne30_oECv3.edison/0370-01-01-00000/* .
 cd ${case_dir}/${case_name}
-
 
 #============================================
 # BUILD MODEL
 #============================================
-# ./xmlchange --id DEBUG --val TRUE
 ./case.build
 
 #============================================
@@ -113,7 +138,7 @@ cat <<EOF >> user_nl_cam
  !----------------------------------------------------------------------------------
  !------------------------------HISTORY FILES--------------------------------------
  !----History files (h2): daily output
- fincl2 = 'TSMN','TSMX','PRECT'
+ fincl2 = 'TS'
  nhtfrq(2)=-24
  mfilt(2)=365
 
@@ -160,4 +185,4 @@ set batch_options = ''
 # SUBMIT SIMULATION
 #=================================================
 ./xmlchange --id JOB_QUEUE --val 'debug'
-./case.submit --batch-args " ${batch_options} "
+#./case.submit --batch-args " ${batch_options} "
